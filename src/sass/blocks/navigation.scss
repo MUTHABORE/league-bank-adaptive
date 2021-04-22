@@ -1,0 +1,48 @@
+.navigation {
+	margin-left: 48px;
+	margin-right: auto;
+}
+
+.navigation__list {
+	padding: 0;
+	margin: 0;
+
+	list-style: none;
+}
+
+.navigation__list--header {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.navigation__list-item--header {
+	margin-right: 5px;
+}
+
+.navigation__list-item--footer {
+	margin: 0 22px;
+	margin-bottom: 12px;
+}
+
+.navigation__item-link {
+	padding: 10px;
+
+	font-size: 16px;
+	color: #000;
+	text-decoration: none;
+
+	&:hover {
+		color: rgba(44, 54, 242, 1);
+	}
+}
+
+.navigation__item-link--header {
+	line-height: 90px;
+	font-weight: 400;
+}
+
+.navigation__item-link--footer {
+	padding: 0;
+	line-height: 0;
+	font-weight: 500;
+}
