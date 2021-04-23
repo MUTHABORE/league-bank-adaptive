@@ -6,6 +6,7 @@ const App = (props) => {
       <header className="site-header">
         <h1 className="visually-hidden">ЛИГА Банк. Доступные кредиты для Вас.</h1>
         <section className="site-header__menu">
+					<button className="site-header__burger" aria-label="Открыть или закрыть окно навигации"></button>
           <a href="#top" className="site-header__logo" aria-label="Логотип ЛИГА Банк"></a>
           <nav className="navigation">
             <ul className="navigation__list navigation__list--header">
@@ -23,7 +24,10 @@ const App = (props) => {
               </li>
             </ul>
           </nav>
-          <a className="site-header__login" href="#top">Войти в Интернет-банк</a>
+					<a className="site-header__login" href="#top">
+          	<span className="site-header__login-title">Войти в Интернет-банк</span>
+					</a>
+					<button className="site-header__cross" aria-label="Закрыть окно навигации"></button>
         </section>
       </header>
           
@@ -79,16 +83,16 @@ const App = (props) => {
           </div>
           <ul className="social">
             <li className="social__item">
-              <a class="social__link social__link--facebook" href="#top">Наша страница в Фейсбук</a>
+              <a className="social__link social__link--facebook" href="#top">Наша страница в Фейсбук</a>
             </li>
             <li className="social__item">
-              <a class="social__link social__link--instagram" href="#top">Наша страница в Инстаграм</a>
+              <a className="social__link social__link--instagram" href="#top">Наша страница в Инстаграм</a>
             </li>
             <li className="social__item">
-              <a class="social__link social__link--twitter" href="#top">Наша страница в Твиттер</a>
+              <a className="social__link social__link--twitter" href="#top">Наша страница в Твиттер</a>
             </li>
             <li className="social__item">
-              <a class="social__link social__link--youtube" href="#top">Наша страница в Ютьюб</a>
+              <a className="social__link social__link--youtube" href="#top">Наша страница в Ютьюб</a>
             </li>
           </ul>
         </div>
