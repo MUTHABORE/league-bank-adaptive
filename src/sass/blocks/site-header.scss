@@ -83,6 +83,7 @@
     background-size: cover;
 		background-image: url("../../images/vector/entry.svg");
 		background-repeat: no-repeat;
+		cursor: pointer;
 	}
 
 	&--open::before {
@@ -104,6 +105,10 @@
 		line-height: 59px;
 		border-top: 1px solid #C1C2CA;
 		border-bottom: 1px solid #C1C2CA;
+	}
+
+	&:hover {
+		color: rgba(44, 54, 242, 1);
 	}
 }
 
@@ -212,9 +217,5 @@
 	
 	.site-header__login-title {
 		display: block;
-
-		&:hover {
-			color: rgba(44, 54, 242, 1);
-		}
 	}
 }

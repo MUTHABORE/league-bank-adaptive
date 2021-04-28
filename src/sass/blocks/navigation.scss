@@ -1,7 +1,7 @@
 .navigation {
 	display: flex;
 	width: 100%;
-	margin-top: 50px;
+	// margin-top: 50px;
 }
 
 .navigation__list {
@@ -28,6 +28,10 @@
 		padding-left: 15px;
 		line-height: 59px;
 		border-top: 1px solid #C1C2CA;
+	}
+
+	&:hover {
+		color: rgba(44, 54, 242, 1);
 	}
 }
 
@@ -92,10 +96,6 @@
 		font-size: 16px;
 		color: #000;
 		text-decoration: none;
-
-		&:hover {
-			color: rgba(44, 54, 242, 1);
-		}
 	}
 
 	.navigation__item-link--header {

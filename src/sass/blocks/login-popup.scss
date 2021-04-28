@@ -1,4 +1,5 @@
 .login-popup {
+	display: none;
 	position: fixed;
 
 	padding: 48px 15px;
@@ -65,6 +66,7 @@
 	width: 100%;
 	margin-bottom: 21px;
 	line-height: 56px;
+	padding-left: 20px;
 
 	background: transparent;
 	border: 1px solid #1F1E25;
@@ -93,13 +95,14 @@
 	color: #707C87;
 	font-size: 14px;
 	order: 99;
+	z-index: 100;
 }
 
-.login-popup__secret-field {
+.login-popup__field--secret {
 	position: relative;
 }
 
-.login-popup__secret-field-button {
+.login-popup__field-button-secret {
 	position: absolute;
 
 	bottom: 46px;
@@ -123,5 +126,72 @@
 		background-size: cover;
 		background-image: url("../../images/vector/closed-eye.svg");
 		background-repeat: no-repeat;
+	}
+}
+
+@media (min-width: $tablet-width) {
+	.login-popup__form {
+		margin: 30px;
+		padding: 55px 82px;
+	}
+
+	.login-popup__logo {
+		margin: 0;
+	}
+
+	.login-popup__close-button {
+		width: 18px;
+		height: 18px;
+		
+		&::before {
+			width: 18px;
+			height: 18px;
+		}
+	}
+
+	.login-popup__wrapper {
+		padding-top: 38px;
+	}
+
+	.login-popup__input-title {
+		line-height: 20px;
+		margin: 0;
+	}
+
+	.login-popup__input {
+		margin-bottom: 26px;
+	}
+
+	.login-popup__field-button-secret {
+		bottom: 51px;
+    right: 23px;
+	}
+
+	.login-popup__help {
+		margin: 0;
+		margin-left: auto;
+		margin-top: -21px;
+    line-height: 20px;
+		font-size: 12px;
+		order: unset;
+	}
+
+	.login-popup__submit-button {
+		margin-top: 24px;
+		line-height: 56px;
+		font-weight: 500;
+		font-size: 18px;
+	}
+}
+
+@media (min-width: $desktop-width) {
+	.login-popup__form {
+		margin: 0 auto;
+		padding: 55px;
+		max-width: 544px;
+	}
+
+	.login-popup__field {
+		line-height: 70px;
 	}
 }
