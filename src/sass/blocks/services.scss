@@ -1,0 +1,131 @@
+.services {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+
+	box-sizing: border-box;
+	background-color: #F6F7FF;
+}
+
+.services__tabs {
+	display: none;
+}
+
+.services__list {
+	display: flex;
+	overflow-x: hidden;
+
+	padding: 0;
+	margin: 0;
+	margin-left: -100vw;
+	list-style: none;
+}
+
+.services__item {
+	position: relative;
+	min-width: 100vw;
+	padding: 60px 15px;
+	padding-right: 32px;
+	box-sizing: border-box;
+
+	&::before {
+		content: "";
+		display: block;
+		position: absolute;
+
+		width: 87px;
+		height: 113px;
+		right: 17px;
+    top: 98px;
+
+		background-size: cover;
+		background-repeat: no-repeat;
+	}
+
+	&--deposits::before {
+		background-image: url("../../images/piggy-bank-mobile.png");
+	}
+}
+
+.services__item-title {
+	margin: 0;
+	margin-top: -5px;
+	margin-left: 1px;
+
+	font-weight: 500;
+	font-size: 16px;
+	line-height: 140%;
+	color: #1F1E25;
+
+	&--deposite {
+		margin-right: 70px;
+	}
+}
+
+.services__options-wrapper {
+	position: relative;
+	padding-left: 16px;
+	padding-top: 20px;
+	width: 220px;
+
+	list-style: none;
+	z-index: 5;
+}
+
+.services__option {
+	position: relative;
+
+	margin-top: 0px;
+	margin-bottom: 11px;
+
+	font-size: 14px;
+	line-height: 140%;
+	color: #1F1E25;
+
+	&::before {
+		content: "";
+		display: block;
+		position: absolute;
+	
+    width: 10px;
+    height: 9px;
+    left: -16px;
+    top: 5px;
+	
+		background-size: contain;
+		background-image: url("../../images/vector/check.svg");
+		background-repeat: no-repeat;
+	}
+}
+
+.services__option-button {
+	display: block;
+
+	margin: 0 auto;
+	padding-right: 5px;
+	margin-top: 23px;
+
+	line-height: 43px;
+	font-weight: 500;
+	font-size: 14px;
+	color: #F6F7FF;
+	text-align: center;
+
+	background: #2C36F2;
+	border-radius: 4px;
+}
+
+.services__offer {
+	margin-right: 20px;
+	margin-top: 22px;
+
+	font-size: 14px;
+	line-height: 145%;
+	color: #1F1E25;
+}
+
+.services__offer-link {
+	font-weight: 700;
+	color: #1F1E25;
+	text-decoration: underline;
+}

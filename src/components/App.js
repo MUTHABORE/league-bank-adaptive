@@ -2,6 +2,7 @@ import React from 'react';
 
 import Header from './header';
 import Slider from './slider';
+import Services from './services';
 
 const App = (props) => {
   return (
@@ -10,6 +11,7 @@ const App = (props) => {
       <main>
 
 				<Slider />
+				<Services />
 
       </main>
       <footer className="footer">
