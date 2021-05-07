@@ -19,9 +19,9 @@ const Services = (props) => {
 					console.log(element.optoins.map((el) => el))
 					return (
 						<li key={i} className={`services__item services__item--${element.modificator}`}>
-							<h3 className="services__item-title">{element.title}</h3>
+							<h3 className={`services__item-title  services__item-title--${element.modificator}`}>{element.title}</h3>
 
-							<ul className="services__options-wrapper">
+							<ul className={`services__options-wrapper  services__options-wrapper--${element.modificator}`}>
 								{element.optoins.map((option, optionIndex) => {
 									return (
 										<li key={optionIndex}>

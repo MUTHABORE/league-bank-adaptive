@@ -111,6 +111,5 @@ export const withSlider = (Component) => {
 			);
 		}
 	}
-
 	return WithSlider;
 }

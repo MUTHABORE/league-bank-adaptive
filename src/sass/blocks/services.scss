@@ -18,6 +18,8 @@
 	padding: 0;
 	margin: 0;
 	margin-left: -100vw;
+	margin-left: -200vw;
+	margin-left: -300vw;
 	list-style: none;
 }
 
@@ -45,31 +47,67 @@
 	&--deposits::before {
 		background-image: url("../../images/piggy-bank-mobile.png");
 	}
+
+	&--credit::before {
+		background-image: url("../../images/car-mobile.png");
+	}
+
+	&--insurance::before {
+		background-image: url("../../images/lock-mobile.png");
+	}
+
+	&--app {
+		padding-bottom: 49px;
+
+		&::before {
+			background-image: url("../../images/cell-mobile.png");
+		}
+	}
 }
 
 .services__item-title {
 	margin: 0;
 	margin-top: -5px;
-	margin-left: 1px;
-
+	
 	font-weight: 500;
 	font-size: 16px;
 	line-height: 140%;
 	color: #1F1E25;
+	
+	&--credit {
+		margin-right: 55px;
+	}
 
-	&--deposite {
-		margin-right: 70px;
+	&--insurance {
+		margin-right: 40px;
+	}
+
+	&--app {
+		margin-right: 50px;
 	}
 }
 
 .services__options-wrapper {
 	position: relative;
-	padding-left: 16px;
+	padding-left: 15px;
 	padding-top: 20px;
 	width: 220px;
 
 	list-style: none;
 	z-index: 5;
+
+	&--insurance {
+		margin-bottom: 25px;
+	}
+
+	&--app li {
+		display: block;
+		margin-right: 20px;
+
+		&:first-child {
+    	margin-right: 45px;
+		}
+	}
 }
 
 .services__option {
@@ -113,6 +151,10 @@
 
 	background: #2C36F2;
 	border-radius: 4px;
+
+	// &--insurance {
+	// 	margin-top: 25px;
+	// }
 }
 
 .services__offer {
