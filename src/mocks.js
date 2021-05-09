@@ -23,6 +23,7 @@ export const SLIDES = [
 export const SERVICES = [
 	{
 		modificator: `deposits`,
+		tabTitle: `Вклады`,
 		title: `Вклады Лига Банка – это выгодная инвестиция в свое будущее`,
 		optoins: [
 			`Проценты по вкладам до 7%`,
@@ -33,6 +34,7 @@ export const SERVICES = [
 	},
 	{
 		modificator: `credit`,
+		tabTitle: `Кредиты`,
 		title: `Лига Банк выдает кредиты под любые цели`,
 		optoins: [
 			`Ипотечный кредит`,
@@ -43,6 +45,7 @@ export const SERVICES = [
 	},
 	{
 		modificator: `insurance`,
+		tabTitle: `Страхование`,
 		title: `Лига Страхование — застрахуем все что захотите`,
 		optoins: [
 			`Автомобильное страхование`,
@@ -53,6 +56,7 @@ export const SERVICES = [
 	},
 	{
 		modificator: `app`,
+		tabTitle: `Онлайн-сервисы`,
 		title: `Лига Банк — это огромное количество онлайн-сервисов для вашего удобства`,
 		optoins: [
 			`Мобильный банк,

@@ -6,7 +6,6 @@ const Identificator = (props) => {
 	return (
 		<ul className={`identificator ${type === `services` ? `identificator--services` : ``}`} disabled>
 			{array.map((element, index) => {
-				console.log(activeElement, index)
 				return (
 					<li key={index}>
 						<label className={

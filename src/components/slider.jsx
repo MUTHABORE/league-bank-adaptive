@@ -7,14 +7,14 @@ import {SLIDES} from '../mocks';
 
 const Slider = (props) => {
 	const {activeSlide, onSwipeStartSlider, sliderWidth} = props;
-
+	console.log(sliderWidth, activeSlide)
 	return (
 		<section className="slider">
 			<div className="slider__container">
-				<ul className="slider__list" style={{marginLeft: `-${(activeSlide -1) * sliderWidth}px`}} onTouchStart={onSwipeStartSlider} onMouseDown={onSwipeStartSlider}>
+				<ul className="slider__list" style={{marginLeft: `-${(activeSlide - 1) * sliderWidth}px`}} onTouchStart={onSwipeStartSlider} onMouseDown={onSwipeStartSlider}>
 					{SLIDES.map((slide, index) => {
 						return (
-							<li key={index} value={index} className={`slider__item ${slide.modificator !== `` ? `slider__item--${slide.modificator}` : ``}`}>
+							<li key={index} className={`slider__item ${slide.modificator !== `` ? `slider__item--${slide.modificator}` : ``}`}>
 								<div className={`slider__background ${slide.modificator !== `` ? `slider__background--${slide.modificator}` : ``}`}></div>
 								<div className={`slider__block ${slide.modificator !== `` ? `slider__block--${slide.modificator}` : ``}`}>
 									<p className={`slider__title ${slide.modificator !== `` ? `slider__title--${slide.modificator}` : ``}`}>{slide.title}</p>
