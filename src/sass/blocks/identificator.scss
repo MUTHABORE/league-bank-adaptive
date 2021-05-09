@@ -43,5 +43,9 @@
 @media (min-width: $desktop-width) {
 	.identificator {
 		margin: 36px 0px;
+		
+		&--services {
+			display: none;
+		}
 	}
 }

@@ -18,22 +18,26 @@ export const withServices = (Component) => {
 		}
 
 		onTabChange(evt) {
-			this.sliderWidth = evt.view.innerWidth;
+			console.log(evt)
+			// this.sliderWidth = evt.view.innerWidth;
 			this.setState({activeSlide: evt.currentTarget.value});
 		}
 
 		onSwipeStartSlider(evt) {
-			this.sliderWidth = evt.view.innerWidth;
+			this.sliderWidth = evt.currentTarget.clientWidth;
+			console.log(evt)
 
-			if (this.sliderWidth >= 1024) {
+			if (evt.view.innerWidth >= 1024) {
 				return;
 			}
 
 			this.slider = evt.currentTarget;
 			const evtType = evt.type === `touchstart` ? evt.changedTouches[0] : evt;
-			
+
+			this.swipeLengthStart = evtType.clientX;
 			this.swipeStartX = evtType.clientX;
 			this.activeSlidePosition = (this.state.activeSlide - 1) * -this.sliderWidth;
+			console.log(this.sliderWidth)
 			
 			document.addEventListener(`touchmove`, this._onSwipeMoveSlider);
 			document.addEventListener(`mousemove`, this._onSwipeMoveSlider);
@@ -46,7 +50,6 @@ export const withServices = (Component) => {
 			let swipeEndX = evtType.clientX;
 			this.differenceX = this.swipeStartX - swipeEndX;
 
-			
 			this.activeSlidePosition += -this.differenceX;
 			
 			this.slider.style.marginLeft = `${this.activeSlidePosition}px`;
@@ -60,16 +63,15 @@ export const withServices = (Component) => {
 			this.swipeStartX = swipeEndX;
 		}
 		
-		_onSwipeEndSlider() {
+		_onSwipeEndSlider(evt) {
 			document.removeEventListener(`touchmove`, this._onSwipeMoveSlider);
 			document.removeEventListener(`mousemove`, this._onSwipeMoveSlider);
 			document.removeEventListener(`touchend`, this._onSwipeEndSlider);
 			document.removeEventListener(`mouseup`, this._onSwipeEndSlider);
 
-			let activeSlideStartPositionAbsolute = (this.state.activeSlide - 1) * this.sliderWidth;
-			let swipeLength = +this.slider.style.marginLeft.slice(0, -2) + activeSlideStartPositionAbsolute;
+			let activeSlideStartPositionAbsolute = (this.state.activeSlide - 1) * 100;
+			let swipeLength = -1 * (this.swipeLengthStart - evt.clientX);
 
-			
 			if (swipeLength <= -this.sliderWidth / 2) {
 				this.setState({activeSlide: this.state.activeSlide === SERVICES.length ? 1 : this.state.activeSlide + 1});
 				return;
@@ -79,8 +81,8 @@ export const withServices = (Component) => {
 				this.setState({activeSlide: this.state.activeSlide === 1 ? SERVICES.length : this.state.activeSlide - 1});
 				return;
 			}
-			
-			this.slider.style.marginLeft = `-${activeSlideStartPositionAbsolute}px`;
+
+			this.slider.style.marginLeft = `-${activeSlideStartPositionAbsolute}%`;
 		}
 
 		render() {

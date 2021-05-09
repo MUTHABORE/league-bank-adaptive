@@ -5,59 +5,55 @@ import Identificator from './identificator';
 import {SERVICES} from '../mocks';
 
 const Services = (props) => {
-	// console.log(props)
 	const {onTabChange, onSwipeStartSlider, sliderWidth, activeSlide} = props;
-	// console.log(sliderWidth, activeSlide)
-	console.log(sliderWidth, 1024)
 	return (
 		<section className="services">
-			<ul className="services__tabs">
-			{SERVICES.map((element, i) => {
-					return (
-						<li key={i} value={i + 1} className={`services__tab ${activeSlide - 1 === i ? `services__tab--active` : ``} services__tab--${element.modificator}`} onClick={onTabChange}>{element.tabTitle}</li>
-					);
-				})}
-			</ul>
+			<div className="services__wrapper">
 
-			<div className="services__list-wrapper">
-
-			<ul className="services__list" style={{marginLeft: `-${(activeSlide - 1) * sliderWidth}px`}} onMouseDown={onSwipeStartSlider} onTouchStart={onSwipeStartSlider}>
+				<ul className="services__tabs">
 				{SERVICES.map((element, i) => {
-					return (
-						<li key={i} className={`services__item services__item--${element.modificator}`}>
+						return (
+							<li key={i} value={i + 1} className={`services__tab ${activeSlide - 1 === i ? `services__tab--active` : ``} services__tab--${element.modificator}`} onClick={onTabChange}>{element.tabTitle}</li>
+						);
+					})}
+				</ul>
 
-							<div className={`services__item-wrapper services__item-wrapper--${element.modificator}`}>
-								<h3 className={`services__item-title services__item-title--${element.modificator}`}>{element.title}</h3>
+				<ul className="services__list" style={{marginLeft: `-${(activeSlide - 1) * 100}%`}} onMouseDown={onSwipeStartSlider} onTouchStart={onSwipeStartSlider}>
+					{SERVICES.map((element, i) => {
+						return (
+							<li key={i} className={`services__item services__item--${element.modificator}`}>
 
-								<ul className={`services__options-list  services__options-list--${element.modificator}`}>
-									{element.optoins.map((option, optionIndex) => {
-										return (
-											<li key={optionIndex}>
-												<p className="services__option">{option}</p>
-											</li>
-										);
-									})}
-								</ul>
+								<div className={`services__item-wrapper services__item-wrapper--${element.modificator}`}>
+									<h3 className={`services__item-title services__item-title--${element.modificator}`}>{element.title}</h3>
 
-								{element.offer === `credit` && (
-									<p className="services__offer" >Рассчитайте ежемесячный платеж {<br/>}
-									и ставку по кредиту воспользовавшись нашим<a href="#top" className="services__offer-link"> кредитным калькулятором</a></p>
-								)}
+									<ul className={`services__options-list  services__options-list--${element.modificator}`}>
+										{element.optoins.map((option, optionIndex) => {
+											return (
+												<li key={optionIndex}>
+													<p className="services__option">{option}</p>
+												</li>
+											);
+										})}
+									</ul>
 
-								{element.buttonText !== undefined && (
-									<a href="#top" className="services__option-button">{element.buttonText}</a>
-								)}
-							</div>
+									{element.offer === `credit` && (
+										<p className="services__offer" >Рассчитайте ежемесячный платеж {<br/>}
+										и ставку по кредиту воспользовавшись нашим<a href="#top" className="services__offer-link"> кредитным калькулятором</a></p>
+									)}
 
-						</li>
-					)
-				})}
-			</ul>
-			</div>
+									{element.buttonText !== undefined && (
+										<a href="#top" className="services__option-button">{element.buttonText}</a>
+									)}
+								</div>
 
-			{sliderWidth < 1024 && (
+							</li>
+						)
+					})}
+				</ul>
+
 				<Identificator array={SERVICES} activeElement={activeSlide} type={`services`}/>
-			)}
+
+			</div>
 
 		</section>
 	);

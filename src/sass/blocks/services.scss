@@ -4,16 +4,22 @@
 	flex-direction: column;
 }
 
+.services__wrapper {
+	display: flex;
+	flex-direction: column;
+	overflow-x: hidden;
+}
+
 .services__tabs {
 	display: none;
 }
 
 .services__list {
 	display: flex;
-	overflow-x: hidden;
 
 	padding: 0;
 	margin: 0;
+	width: 100%;
 
 	list-style: none;
 
@@ -28,8 +34,8 @@
 .services__item {
 	position: relative;
 	min-width: 100vw;
+	min-width: 100%;
 	padding: 60px 15px;
-	padding-right: 32px;
 	box-sizing: border-box;
 
 	background-color: #F6F7FF;
@@ -41,7 +47,7 @@
 
 		width: 87px;
 		height: 113px;
-		right: 17px;
+		right: 0px;
     top: 98px;
 
 		background-size: cover;
@@ -179,7 +185,6 @@
 
 @media (min-width: $tablet-width) {
 	.services__item-wrapper {
-		// margin: 0;
 		padding-right: 295px;
 	}
 
@@ -189,7 +194,7 @@
 		&::before {
 			width: 289px;
 			height: 260px;
-			right: 62px;
+			right: 45px;
 			top: 60px;
 		}
 	
@@ -274,20 +279,15 @@
 
 
 @media (min-width: $desktop-width) {
-// 	.services__list {
-// 		margin-left: -100vw;
-// margin-left: -200vw;
-// margin-left: -300vw;
-// }
-
 	.services {
-		padding: 60px 98px;
-		margin: 0 auto;
-		min-width: 100%;
-    max-width: 1170px;
-		box-sizing: border-box;
-		overflow-x: hidden;
 		position: relative;
+		max-width: 1170px;
+		margin: 0 auto;
+		padding: 60px 20px;
+	}
+	
+	.services__wrapper {
+		overflow-x: hidden;
 	}
 	
 	.services__tabs {
@@ -369,13 +369,13 @@
 			color: #2c36f2;
 		}
 	}
-	
-	.services__list-wrapper {
-		overflow-x: hidden;
-	}
+
 
 	.services__list {
-		overflow-x: unset;
+		// width: 100vw;
+		justify-content: space-between;
+  	align-items: flex-start;
+		// overflow-x: unset;
 	}
 	
 	.services__item {
@@ -383,8 +383,9 @@
     left: 0%;
 		
 		padding: 60px 70px;
+		// padding-bottom: 41px;
 		min-width: 100vw;
-		max-width: 1170px;
+		min-width: 100%;
 
 		&::before {
 			width: 440px;
@@ -397,31 +398,62 @@
 		}
 	
 		&--credit::before {
+    	top: 55px;
 			background-image: url("../../images/car-desktop.png");
 		}
 	
 		&--insurance::before {
+			top: 48px;
 			background-image: url("../../images/lock-desktop.png");
 		}
 	
 		&--app::before {
+			top: 54px;
 			background-image: url("../../images/cell-desktop.png");
 		}
 	}
 
 	.services__item-wrapper {
 		margin: 0;
+
+		&--app {
+			max-width: 420px;
+		}
 	}
 
 	.services__item-title {
 		font-weight: 500;
 		font-size: 22px;
+
+		&--credit {
+			margin-right: 90px;
+		}
+
+		&--insurance {
+			margin-right: 40px;
+		}
+
+		&--app {
+			margin-right: 0;
+		}
 	}
 
 	.services__options-list {
 		width: auto;
 		margin: 0;
 		padding-top: 28px;
+
+		&--credit {
+			padding-top: 29px;
+		}
+
+		&--app li {
+			margin-right: 50px;
+
+			&:first-child {
+				margin-right: 175px;
+			}
+		}
 	}
 
 	.services__option {
@@ -433,5 +465,11 @@
 	.services__option-button {
 		margin-top: 19px;
 		line-height: 51px;
+	}
+
+	.services__offer {
+		margin-right: 50px;
+		font-size: 18px;
+		line-height: 140%;
 	}
 }

@@ -7,11 +7,11 @@ import {SLIDES} from '../mocks';
 
 const Slider = (props) => {
 	const {activeSlide, onSwipeStartSlider, sliderWidth} = props;
-	console.log(sliderWidth, activeSlide)
+
 	return (
 		<section className="slider">
 			<div className="slider__container">
-				<ul className="slider__list" style={{marginLeft: `-${(activeSlide - 1) * sliderWidth}px`}} onTouchStart={onSwipeStartSlider} onMouseDown={onSwipeStartSlider}>
+				<ul className="slider__list" style={{marginLeft: `-${(activeSlide - 1) * 100}vw`}} onTouchStart={onSwipeStartSlider} onMouseDown={onSwipeStartSlider}>
 					{SLIDES.map((slide, index) => {
 						return (
 							<li key={index} className={`slider__item ${slide.modificator !== `` ? `slider__item--${slide.modificator}` : ``}`}>

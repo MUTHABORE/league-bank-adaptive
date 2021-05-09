@@ -47,6 +47,7 @@ export const withSlider = (Component) => {
 			this.slider = evt.currentTarget;
 			const evtType = evt.type === `touchstart` ? evt.changedTouches[0] : evt;
 			
+			this.swipeLengthStart = evtType.clientX;
 			this.swipeStartX = evtType.clientX;
 			this.activeSlidePosition = (this.state.activeSlide - 1) * -this.sliderWidth;
 			
@@ -82,7 +83,7 @@ export const withSlider = (Component) => {
 			document.removeEventListener(`mouseup`, this._onSwipeEndSlider);
 
 			let activeSlideStartPositionAbsolute = (this.state.activeSlide - 1) * this.sliderWidth;
-			let swipeLength = +this.slider.style.marginLeft.slice(0, -2) + activeSlideStartPositionAbsolute;
+			let swipeLength = -1 * (this.swipeLengthStart - evt.clientX);
 
 			
 			if (swipeLength <= -this.sliderWidth / 2) {
