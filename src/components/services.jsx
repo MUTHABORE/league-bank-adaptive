@@ -5,7 +5,7 @@ import Identificator from './identificator';
 import {SERVICES} from '../mocks';
 
 const Services = (props) => {
-	const {onTabChange, onSwipeStartSlider, sliderWidth, activeSlide} = props;
+	const {onTabChange, onSwipeStartSlider, activeSlide} = props;
 	return (
 		<section className="services">
 			<div className="services__wrapper">

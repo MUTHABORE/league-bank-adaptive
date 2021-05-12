@@ -3,6 +3,7 @@ import React from 'react';
 import Header from './header';
 import Slider from './slider';
 import Services from './services';
+import CreditCalculator from './credit-calculator';
 
 const App = (props) => {
   return (
@@ -12,6 +13,8 @@ const App = (props) => {
 
 				<Slider />
 				<Services />
+				<CreditCalculator />
+
 
       </main>
       <footer className="footer">
