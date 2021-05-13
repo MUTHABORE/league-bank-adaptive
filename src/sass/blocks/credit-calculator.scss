@@ -14,6 +14,10 @@
 	color: #1F1E25;
 }
 
+.credit-calculator__step {
+	margin-bottom: 9px;
+}
+
 .credit-calculator__fieldset {
 	padding: 0;
 	margin: 0;
@@ -64,35 +68,96 @@
 	line-height: 57px;
 	font-weight: 400;
 	cursor: pointer;
-	
-	&--placeholder {
-		padding-right: 44px;
-		font-weight: 500;
-	}
-	
-	&--selected {
-		padding-right: 40px;
-		font-weight: 500;
-		
-	}
-	
-	&:first-child {
-		display: block;
-		position: relative;
 
-		&::after {
-			display: block;
-			position: absolute;
-			content: "";
-	
-			top: 24px;
-			right: 13px;
-			width: 18px;
-			height: 10px;
-	
-			background-image: url("../../images/vector/select.svg");
-			background-repeat: no-repeat;
-		}
+	&:hover {
+		color: rgba(44, 54, 242, 1);
 	}
 }
 
+.credit-calculator__option-placeholder {
+	position: relative;
+	display: block;
+
+	padding: 0 14px;
+	padding-right: 33px;
+	border-top: 1px solid #C1C2CA;
+
+	font-weight: 500;
+	line-height: 57px;
+
+	cursor: pointer;
+
+	&::after {
+		display: block;
+		position: absolute;
+		content: "";
+
+		top: 24px;
+		right: 13px;
+		width: 18px;
+		height: 10px;
+
+		background-image: url("../../images/vector/select.svg");
+		background-repeat: no-repeat;
+	}
+
+	&--open {
+		border-bottom: 1px solid #0A1E32;
+	}
+}
+
+.credit-calculator__input-wrapper {
+	position: relative;
+}
+
+.credit-calculator__value-changer {
+	position: absolute;
+
+	padding: 0;
+	width: 16px;
+	height: 100%;
+
+	background-color: transparent;
+	background-repeat: no-repeat;
+	background-position: center;
+	border: none;
+
+	&--down {
+		left: 20px;
+		background-image: url("../../images/minus.png");
+	}
+	
+	&--up {
+		right: 20px;
+		background-image: url("../../images/plus.png");
+	}
+}
+
+.credit-calculator__input {
+	width: 100%;
+	padding: 0 40px;
+	margin-top: 0px;
+
+	border: 1px solid #1F1E25;
+	border-radius: 4px;
+	box-sizing: border-box;
+	text-align: center;
+
+	line-height: 60px;
+	font-weight: 500;
+	font-size: 16px;
+	color: #1F1E25;
+
+	&::-webkit-inner-spin-button, 
+	&::-webkit-outer-spin-button { 
+		-webkit-appearance: none; 
+		margin: 0; 
+	}
+}
+
+.credit-calculator__input-title {
+	font-size: 16px;
+	line-height: 140%;
+
+	color: #394959;
+}
