@@ -12,13 +12,20 @@ export const withCreditCalculator = (Component) => {
 				isSelectOpen: false,
 				userCredit: {
 					type: null,
-					propertyValue: null,
+					propertyValue: ``,
 				}
 			}
 
+			this.value = ``;
+
 			this._onOptionChoseClick = this._onOptionChoseClick.bind(this);
+			this._propertyValueCorrection = this._propertyValueCorrection.bind(this);
 			this.onOpenSelect = this.onOpenSelect.bind(this);
 			this.onCloseSelect = this.onCloseSelect.bind(this);
+			this.onPropertyValueMaskClick = this.onPropertyValueMaskClick.bind(this);
+			this.onPropertyValueChange = this.onPropertyValueChange.bind(this);
+			this.onPropertyValueBlur = this.onPropertyValueBlur.bind(this);
+			this.onButtonPropertyValueChange = this.onButtonPropertyValueChange.bind(this);
 		}
 
 		onOpenSelect(evt) {
@@ -43,7 +50,7 @@ export const withCreditCalculator = (Component) => {
 			})
 
 			chosenOption.style.display = `block`;
-			this.setState((extend(this.state, {isSelectOpen: false})));
+			this.setState({isSelectOpen: false});
 		}
 		
 		_onOptionChoseClick(evt) {
@@ -52,48 +59,82 @@ export const withCreditCalculator = (Component) => {
 			chosenOption.parentNode.querySelector(`.credit-calculator__option-placeholder`).textContent = chosenOption.textContent;
 
 			console.log(this.state)
-			this.setState((extend(this.state, {userCredit: {type: CREDIT_TYPE[chosenOption.value - 1]}})));
+			
+			this.setState({userCredit: extend(this.state.userCredit, {type: CREDIT_TYPE[chosenOption.value - 1]})});
 
 			console.log(this.state)
 
 			this.onCloseSelect(evt);
+		}
 
-			// const selectedOption = evt.currentTarget;
-			// const allOptions = selectedOption.parentNode.querySelectorAll(`.credit-calculator__option`);
+		onPropertyValueMaskClick(evt) {
+			evt.preventDefault();
+			const container = evt.currentTarget.parentNode;
+			const mask = container.querySelector(`.credit-calculator__input--property-value-mask`);
+			const input = container.querySelector(`.credit-calculator__input--property-value`);
 
-			// if (selectedOption.className.indexOf(`placeholder`) > 0 || selectedOption.className.indexOf(`selected`) > 0) {
-			// 	console.log(`chose`)
-			// 	allOptions.forEach((element) => {
-			// 		element.style.display = `none`;
-			// 	})
-			// 	selectedOption.style.display = `block`;
-			// 	selectedOption.style.borderBottom = `none`;
-			// 	return;
-			// }
-			
-			// selectedOption.parentNode.querySelectorAll(`.credit-calculator__option`).forEach((element) => {
-			// 	element.classList.remove(`credit-calculator__option--selected`)
-			// 	element.style.display = `none`;
-			// })
+			console.log(mask, input)
 
-			// selectedOption.classList.add(`credit-calculator__option--selected`);
-			// selectedOption.parentNode.prepend(selectedOption);
-			// selectedOption.style.display = `block`;
-			// selectedOption.style.borderBottom = `none`;
+			mask.style.display = `none`;
+			input.style.display = `block`;
+
+			input.focus();
+		}
+
+		_propertyValueCorrection() {
+			if (this.value === ``) return;
+
+			if (this.value < 1200000 || this.value > 25000000) {
+				this.setState({userCredit: extend(this.state.userCredit, {propertyValue: `Некорректное значение`})});
+				return;
+			}
+			this.setState({userCredit: extend(this.state.userCredit, {propertyValue: this.value})});
+		}
+
+		onPropertyValueChange(evt) {
+			this.value = evt.currentTarget.value;
+			console.log(this.value)
 			
-			// selectedOption.removeEventListener(`click`, this._onOptionChoseClick);
-			// selectedOption.addEventListener(`click`, this._onReselectOption);
-			// console.log(selectedOption.value, CREDIT_TYPE)
-			
-			// this.setState((extend(this.state, {userCredit: {type: CREDIT_TYPE[selectedOption.value - 1]}})));
+			this.setState({userCredit: extend(this.state.userCredit, {propertyValue: this.value})});
+			console.log(this.state)
+		}
+
+		onButtonPropertyValueChange(evt) {
+			const step = CREDIT_TYPE[this.state.userCredit.type] === 1 ? 100000 : 50000;
+			const stepDirection = evt.target.classList.contains(`credit-calculator__value-changer--down`) ? -1 : 1;
+
+			console.log(stepDirection)
+
+			this.setState({userCredit: extend(this.state.userCredit, {propertyValue: +this.state.userCredit.propertyValue + (step * stepDirection)})});
+
+			this._propertyValueCorrection();
+		}
+		
+		
+		onPropertyValueBlur(evt) {
+			evt.preventDefault();
+			const container = evt.currentTarget.parentNode;
+			const mask = container.querySelector(`.credit-calculator__input--property-value-mask`);
+			const input = container.querySelector(`.credit-calculator__input--property-value`);
+
+			this._propertyValueCorrection();
+			mask.style.display = `block`;
+			input.style.display = `none`;
+
+			console.log(this.state.userCredit.propertyValue);
 		}
 
 		render() {
 			return(
 				<Component
+					isSelectOpen={this.state.isSelectOpen}
+					propertyValue={this.state.userCredit.propertyValue}
 					onOpenSelect={this.onOpenSelect}
 					onCloseSelect={this.onCloseSelect}
-					isSelectOpen={this.state.isSelectOpen}
+					onPropertyValueMaskClick={this.onPropertyValueMaskClick}
+					onPropertyValueChange={this.onPropertyValueChange}
+					onPropertyValueBlur={this.onPropertyValueBlur}
+					onButtonPropertyValueChange={this.onButtonPropertyValueChange}
 				/>
 			)
 		}
