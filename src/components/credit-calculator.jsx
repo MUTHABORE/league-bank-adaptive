@@ -4,7 +4,8 @@ import {valueMask} from '../util/util';
 import {withCreditCalculator} from '../hocs/with-credit-calculator';
 
 const CreditCalculator = (props) => {
-	const {onOpenSelect, onCloseSelect, onPropertyValueChange, isSelectOpen, propertyValue, onPropertyValueBlur, onPropertyValueMaskClick, onButtonPropertyValueChange} = props;
+	const {onOpenSelect, onCloseSelect, onOwnValueChange, isSelectOpen, ownValue, initialFee, onOwnValueBlur, onOwnValueMaskClick, onButtonOwnValueChange, onChangeInitialFee, onInitialFeeMaskClick, onInitialFeeBlur} = props;
+	console.log(initialFee)
 	return (
 		<section className="credit-calculator">
 			<h2 className="credit-calculator__title">Кредитный калькулятор</h2>
@@ -29,16 +30,17 @@ const CreditCalculator = (props) => {
 
 					<p className="credit-calculator__input-title">Стоимость недвижимости</p>
 					<div className="credit-calculator__input-wrapper">
-						<button className="credit-calculator__value-changer credit-calculator__value-changer--down" onClick={onButtonPropertyValueChange}></button>
-						<input className="credit-calculator__input credit-calculator__input--property-value-mask" type="text" defaultValue={propertyValue === `` ? `` : valueMask(propertyValue)} onMouseDown={onPropertyValueMaskClick} />
-						<input className="credit-calculator__input credit-calculator__input--property-value" type="number" value={propertyValue} onBlur={onPropertyValueBlur}  onChange={onPropertyValueChange} />
-						<button className="credit-calculator__value-changer credit-calculator__value-changer--up" onClick={onButtonPropertyValueChange}></button>
+						<button className="credit-calculator__value-changer credit-calculator__value-changer--down" onClick={onButtonOwnValueChange}></button>
+						<input className="credit-calculator__input credit-calculator__input--own-value-mask" type="text" value={valueMask(ownValue)} onMouseDown={onOwnValueMaskClick} onChange={onOwnValueChange} />
+						<input className="credit-calculator__input credit-calculator__input--own-value" type="number" value={ownValue} onBlur={onOwnValueBlur} onChange={onOwnValueChange} />
+						<button className="credit-calculator__value-changer credit-calculator__value-changer--up" onClick={onButtonOwnValueChange}></button>
 					</div>
 					<small className="credit-calculator__input-info">От 1 200 000  до 25 000 000 рублей</small>
 
-					<p className="credit-calculator__input-title">Стоимость недвижимости</p>
-					<input className="credit-calculator__input" type="number"/>
-					{/* <input className="credit-calculator__input-range" type="range" value="10" max="100" min="0"/> */}
+					<p className="credit-calculator__input-title">Первоначальный взнос</p>
+					<input className="credit-calculator__input credit-calculator__input--initial-fee-mask" type="text" value={valueMask(initialFee)} onClick={onInitialFeeMaskClick} onChange={onChangeInitialFee} />
+					<input className="credit-calculator__input credit-calculator__input--initial-fee" type="number" value={initialFee} onChange={onChangeInitialFee} onBlur={onInitialFeeBlur} />
+					<input className="credit-calculator__input-range" type="range" step="5" value="10" max="100" min="10"/>
 				</fieldset>
 			</div>
 

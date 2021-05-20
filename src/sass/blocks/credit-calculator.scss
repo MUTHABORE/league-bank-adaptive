@@ -150,8 +150,17 @@
 	font-size: 16px;
 	color: #1F1E25;
 
-	&--property-value {
+	&--own-value {
 		display: none;
+	}
+
+	&--initial-fee {
+		display: none;
+		margin-top: 9px;
+
+		&-mask {
+			margin-top: 9px;
+		}
 	}
 
 	&::-webkit-inner-spin-button, 
@@ -172,9 +181,53 @@
 .credit-calculator__input-info {
 	display: block;
 	margin-top: 6px;
+	margin-bottom: 10px;
 
 	font-size: 14px;
 	line-height: 140%;
 	color: #707C87;
-	letter-spacing: 0.1px;
+	letter-spacing: 0.2px;
+}
+
+.credit-calculator__input-range {
+	position: relative;
+	height: 1px;
+	width: 100%;
+	margin: 21px 0px;
+	background: #C1C2CA;
+
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+
+	&::after {
+		content: "10%";
+		display: block;
+		position: absolute;
+
+		height: 15px;
+		width: 30px;
+		left: 1px;
+    bottom: -26px;
+
+		font-size: 14px;
+		line-height: 140%;
+		color: #707C87;
+	}
+	
+	&::-webkit-slider-runnable-track {
+		height: 1px;
+		background-color: #C1C2CA;
+	}
+
+	&::-webkit-slider-thumb {
+		background: #2C36F2;
+		border-radius: 50%;
+		cursor: pointer;
+		width: 14px;
+		height: 14px;
+		-webkit-appearance: none;
+		margin-top: -6px;
+		margin-left: 1px;
+	}
 }

@@ -3,7 +3,8 @@ export const extend = (a, b) => {
 };
 
 export const valueMask = (value) => {
+	console.log(value)
+	console.log(value.toLocaleString() + ` рублей`)
 	if (isNaN(value)) return value;
-	var result = value.toLocaleString() + ` рублей`;
-	return result;
-}
+	return value.toLocaleString() + ` рублей`;
+};
