@@ -1,3 +1,5 @@
+import {START_OWN_VALUE, START_CAR_VALUE} from './const';
+
 export const SLIDES = [
 	{
 		title: `Лига Банк`,
@@ -65,4 +67,20 @@ export const SERVICES = [
 		],
 		buttonText: `Узнать подробнее`,
 	},
+];
+
+
+export const CREDITS_TYPE_INFO = [
+	{
+		type: `mortgage`,
+		isMaternalCapitalUsed: false,
+		ownValue: START_OWN_VALUE,
+		initialFee: START_OWN_VALUE / 10,
+	},
+	{
+		type: `car`,
+		isMaternalCapitalUsed: false,
+		ownValue: START_CAR_VALUE,
+		initialFee: START_CAR_VALUE / 10,
+	}
 ];

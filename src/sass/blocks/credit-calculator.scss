@@ -150,6 +150,9 @@
 	font-size: 16px;
 	color: #1F1E25;
 
+	-webkit-appearance: none;
+	-moz-appearance: textfield;
+	
 	&--own-value {
 		display: none;
 	}
@@ -157,15 +160,24 @@
 	&--initial-fee {
 		display: none;
 		margin-top: 9px;
-
+		
 		&-mask {
 			margin-top: 9px;
 		}
 	}
 
+	&--loan-terms {
+		display: none;
+	}
+
+	&:hover,
+	&:focus {
+		-moz-appearance: number-input;
+	}
+	
 	&::-webkit-inner-spin-button, 
-	&::-webkit-outer-spin-button { 
-		-webkit-appearance: none; 
+	&::-webkit-outer-spin-button {
+		-webkit-appearance: none;
 		margin: 0; 
 	}
 }
@@ -189,39 +201,33 @@
 	letter-spacing: 0.2px;
 }
 
+.credit-calculator__input-range-wrapper {
+	position: relative;
+}
+
 .credit-calculator__input-range {
 	position: relative;
 	height: 1px;
 	width: 100%;
-	margin: 21px 0px;
+	margin-top: 21px;
+	margin-bottom: 30px;
 	background: #C1C2CA;
 
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	appearance: none;
-
-	&::after {
-		content: "10%";
-		display: block;
-		position: absolute;
-
-		height: 15px;
-		width: 30px;
-		left: 1px;
-    bottom: -26px;
-
-		font-size: 14px;
-		line-height: 140%;
-		color: #707C87;
-	}
 	
-	&::-webkit-slider-runnable-track {
+	&::-webkit-slider-runnable-track, 
+	&::-moz-range-track {
+		position: relative;
 		height: 1px;
 		background-color: #C1C2CA;
 	}
 
-	&::-webkit-slider-thumb {
+	&::-webkit-slider-thumb,
+	&::-moz-range-thumb {
 		background: #2C36F2;
+		border: none;
 		border-radius: 50%;
 		cursor: pointer;
 		width: 14px;
@@ -230,4 +236,16 @@
 		margin-top: -6px;
 		margin-left: 1px;
 	}
+}
+
+.credit-calculator__input-range-min-title {
+	position: absolute;
+	display: block;
+
+	left: 1px;
+	bottom: 0;
+
+	font-size: 14px;
+	line-height: 140%;
+	color: #707C87;
 }
