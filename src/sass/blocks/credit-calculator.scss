@@ -165,9 +165,14 @@
 			margin-top: 9px;
 		}
 	}
-
+	
 	&--loan-terms {
 		display: none;
+		margin-top: 9px;
+		
+		&-mask {
+			margin-top: 9px;
+		}
 	}
 
 	&:hover,
@@ -203,6 +208,7 @@
 
 .credit-calculator__input-range-wrapper {
 	position: relative;
+	margin-bottom: 10px;
 }
 
 .credit-calculator__input-range {
@@ -216,6 +222,10 @@
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	appearance: none;
+
+	&--loan-terms {
+		margin-top: 17px;
+	}
 	
 	&::-webkit-slider-runnable-track, 
 	&::-moz-range-track {
@@ -238,7 +248,7 @@
 	}
 }
 
-.credit-calculator__input-range-min-title {
+.credit-calculator__input-range-unit-title {
 	position: absolute;
 	display: block;
 
@@ -248,4 +258,45 @@
 	font-size: 14px;
 	line-height: 140%;
 	color: #707C87;
+
+	&--max {
+    left: auto;
+		right: 0px;
+	}
 }
+
+.credit-calculator__input-checkbox {
+	display: none;
+}
+
+.credit-calculator__input-checkbox-custom {
+	position: relative;
+	padding-left: 20px;
+	cursor: pointer;
+
+	font-size: 14px;
+	line-height: 140%;
+
+	color: #1F1E25;
+
+	&::before {
+		position: absolute;
+		display: block;
+		content: "";
+
+		width: 16px;
+		height: 16px;
+		left: 0;
+
+		border-radius: 2px;
+		background-color: #2C36F2;
+	}
+
+	&::before {
+		background-image: url("../../images/vector/checkbox-mark.svg");
+		background-repeat: no-repeat;
+		background-position: center;
+	}
+}
+
+

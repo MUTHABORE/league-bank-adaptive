@@ -42,6 +42,7 @@ export const withCreditCalculator = (Component) => {
 			this.onLoanTermsMaskClick = this.onLoanTermsMaskClick.bind(this);
 			this.onLoanTermsChange = this.onLoanTermsChange.bind(this);
 			this.onLoanTermsBlur = this.onLoanTermsBlur.bind(this);
+			this.onLoanTermsRangeChange = this.onLoanTermsRangeChange.bind(this);
 		}
 
 		onOpenSelect(evt) {
@@ -71,50 +72,28 @@ export const withCreditCalculator = (Component) => {
 		
 		_onOptionChoseClick(evt) {
 			const chosenOption = evt.currentTarget;
-			const value = evt.currentTarget.value;
+			const value = chosenOption.value;
 			const creditType = CREDIT_TYPE[value];
 
 			chosenOption.parentNode.querySelector(`.credit-calculator__option-placeholder`).textContent = chosenOption.textContent;
 
+			console.log(this.state.creditType)
 			console.log(this.state.userCredit.initialFee)
+			console.log(value)
 			
 			this.setState({
 				creditType: creditType,
 				userCredit: CREDITS_TYPE_INFO.find(credit => credit.type === creditType),
-				startOwnValue: this.state.creditType === `mortgage` ? START_OWN_VALUE : START_CAR_VALUE,
-				minOwnValue: this.state.creditType === `mortgage` ? MIN_OWN_VALUE : MIN_CAR_VALUE,
-				maxOwnValue: this.state.creditType === `mortgage` ? MAX_OWN_VALUE : MAX_CAR_VALUE,
-				minInitialFeeCoefficient: this.state.creditType === `mortgage` ? MIN_OWN_INITIAL_FEE_COEFFICIENT : MIN_CAR_INITIAL_FEE_COEFFICIENT,
+				startOwnValue: creditType === `mortgage` ? START_OWN_VALUE : START_CAR_VALUE,
+				minOwnValue: creditType === `mortgage` ? MIN_OWN_VALUE : MIN_CAR_VALUE,
+				maxOwnValue: creditType === `mortgage` ? MAX_OWN_VALUE : MAX_CAR_VALUE,
+				minInitialFeeCoefficient: creditType === `mortgage` ? MIN_OWN_INITIAL_FEE_COEFFICIENT : MIN_CAR_INITIAL_FEE_COEFFICIENT,
 			});
 			
+			console.log(this.state.creditType)
 			console.log(this.state.userCredit.initialFee)
 			this.onCloseSelect(evt);
 		}
-		// _onOptionChoseClick(evt) {
-		// 	const chosenOption = evt.currentTarget;
-		// 	const value = evt.currentTarget.value;
-		// 	const creditType = CREDIT_TYPE[value];
-
-		// 	chosenOption.parentNode.querySelector(`.credit-calculator__option-placeholder`).textContent = chosenOption.textContent;
-			
-		// 	this.setState({creditType: CREDIT_TYPE[value]},
-		// 		this.setState({userCredit: CREDITS_TYPE_INFO.find(credit => credit.type === CREDIT_TYPE[value])}),
-		// 		this.setState({userCredit: extend(this.state.userCredit, {ownValue: valueFloorPenny(+this.state.userCredit.ownValue)})})
-		// 		);
-
-		// 		console.log(this.state.minInitialFeeCoefficient)
-				
-		// 		this.setState({
-		// 			startOwnValue: this.state.creditType === `mortgage` ? START_OWN_VALUE : START_CAR_VALUE,
-		// 			minOwnValue: this.state.creditType === `mortgage` ? MIN_OWN_VALUE : MIN_CAR_VALUE,
-		// 			maxOwnValue: this.state.creditType === `mortgage` ? MAX_OWN_VALUE : MAX_CAR_VALUE,
-		// 			minInitialFeeCoefficient: this.state.creditType === `mortgage` ? MIN_OWN_INITIAL_FEE_COEFFICIENT : MIN_CAR_INITIAL_FEE_COEFFICIENT,
-		// 			userCredit: extend(this.state.userCredit, {loanTerms: this.state.creditType === `mortgage` ? MIN_OWN_LOAN_TERMS : MIN_CAR_LOAN_TERMS}),
-		// 		});
-		// 		console.log(this.state.minInitialFeeCoefficient)
-
-		// 	this.onCloseSelect(evt);
-		// }
 
 		// OWN VALUE
 		// OWN VALUE
@@ -266,7 +245,11 @@ export const withCreditCalculator = (Component) => {
 			mask.style.display = `block`;
 			input.style.display = `none`;
 
+			console.log(value, minInitialFee)
+			console.log(this.state.userCredit.ownValue, this.state.minInitialFeeCoefficient)
+			
 			if (value < minInitialFee) {
+				console.log(`lower then`)
 				this.setState({userCredit: extend(this.state.userCredit, {initialFee: minInitialFee})});
 				return;
 			}
@@ -332,6 +315,12 @@ export const withCreditCalculator = (Component) => {
 			this.setState({userCredit: extend(this.state.userCredit, {loanTerms: value})});
 		}
 
+		onLoanTermsRangeChange(evt) {
+			evt.preventDefault();
+
+			this.setState({userCredit: extend(this.state.userCredit, {loanTerms: evt.currentTarget.value})});
+		}
+
 		render() {
 			return(
 				<Component
@@ -361,6 +350,7 @@ export const withCreditCalculator = (Component) => {
 					onLoanTermsMaskClick={this.onLoanTermsMaskClick}
 					onLoanTermsChange={this.onLoanTermsChange}
 					onLoanTermsBlur={this.onLoanTermsBlur}
+					onLoanTermsRangeChange={this.onLoanTermsRangeChange}
 				/>
 			)
 		}

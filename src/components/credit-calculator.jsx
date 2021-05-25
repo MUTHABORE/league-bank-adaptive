@@ -5,7 +5,7 @@ import {valueMask} from '../util/util';
 import {withCreditCalculator} from '../hocs/with-credit-calculator';
 
 const CreditCalculator = (props) => {
-	const {creditType, onOpenSelect, onCloseSelect, onOwnValueChange, isSelectOpen, ownValue, initialFee, maxInitialFee, minInitialFee, onOwnValueBlur, onOwnValueMaskClick, onButtonOwnValueChange, onChangeInitialFee, onInitialFeeMaskClick, onInitialFeeBlur, onInitialFeeRangeChange, onLoanTermsChange, onLoanTermsBlur, onLoanTermsMaskClick, loanTerms} = props;
+	const {creditType, onOpenSelect, onCloseSelect, onOwnValueChange, isSelectOpen, ownValue, initialFee, maxInitialFee, minInitialFee, onOwnValueBlur, onOwnValueMaskClick, onButtonOwnValueChange, onChangeInitialFee, onInitialFeeMaskClick, onInitialFeeBlur, onInitialFeeRangeChange, onLoanTermsChange, onLoanTermsBlur, onLoanTermsMaskClick, loanTerms, onLoanTermsRangeChange} = props;
 	// console.log(loanTerms)
 	return (
 		<section className="credit-calculator">
@@ -44,8 +44,8 @@ const CreditCalculator = (props) => {
 						<input className="credit-calculator__input credit-calculator__input--initial-fee-mask" type="text" value={valueMask(initialFee)} onClick={onInitialFeeMaskClick} onChange={onChangeInitialFee} />
 						<input className="credit-calculator__input credit-calculator__input--initial-fee" type="number" value={initialFee} onChange={onChangeInitialFee} onBlur={onInitialFeeBlur} />
 						<div className="credit-calculator__input-range-wrapper">
-							<input className="credit-calculator__input-range" type="range" step={maxInitialFee * 0.05 || 0} value={initialFee} min={minInitialFee || 0} max={maxInitialFee || 0} onChange={onInitialFeeRangeChange} />
-							<small className="credit-calculator__input-range-min-title">{creditType === `mortgage` ? `10%` : `20%`}</small>
+							<input className="credit-calculator__input-range" type="range" step={maxInitialFee * 0.05} value={initialFee} min={minInitialFee} max={maxInitialFee} onChange={onInitialFeeRangeChange} />
+							<small className="credit-calculator__input-range-unit-title">{Math.round(initialFee / (maxInitialFee / 100)) + `%`}</small>
 						</div>
 
 						<p className="credit-calculator__input-title">Срок кредитования</p>
@@ -53,9 +53,19 @@ const CreditCalculator = (props) => {
 						<input className="credit-calculator__input credit-calculator__input--loan-terms" type="number" value={loanTerms} onChange={onLoanTermsChange} onBlur={onLoanTermsBlur} />
 
 						<div className="credit-calculator__input-range-wrapper">
-							<input className="credit-calculator__input-range" type="range" step="1" value={loanTerms} min={CREDIT_TYPE[creditType]} max={maxInitialFee || 0} onChange={onInitialFeeRangeChange} />
-							<small className="credit-calculator__input-range-min-title">{creditType === `mortgage` ? `10%` : `20%`}</small>
+							<input className="credit-calculator__input-range credit-calculator__input-range--loan-terms" type="range" step="1" value={loanTerms} min={creditType === `mortgage` ? MIN_OWN_LOAN_TERMS : MIN_CAR_LOAN_TERMS} max={creditType === `mortgage` ? MAX_OWN_LOAN_TERMS : MAX_CAR_LOAN_TERMS} onChange={onLoanTermsRangeChange} />
+							<small className="credit-calculator__input-range-unit-title">{creditType === `mortgage` ? `5 лет` : `1 год`}</small>
+							<small className="credit-calculator__input-range-unit-title credit-calculator__input-range-unit-title--max">{creditType === `mortgage` ? `30 лет` : `5 лет`}</small>
 						</div>
+
+						<input className="credit-calculator__input-checkbox" type="checkbox"/>
+						<div className="credit-calculator__input-checkbox-custom">Использовать материнский капитал</div>
+
+						{/* <input type="checkbox"/>
+						<span>Использовать материнский капитал</span>
+
+						<input type="checkbox"/>
+						<span>Использовать материнский капитал</span> */}
 
 					</fieldset>
 				</div>
