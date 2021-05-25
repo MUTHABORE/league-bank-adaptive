@@ -71,23 +71,50 @@ export const withCreditCalculator = (Component) => {
 		
 		_onOptionChoseClick(evt) {
 			const chosenOption = evt.currentTarget;
+			const value = evt.currentTarget.value;
+			const creditType = CREDIT_TYPE[value];
 
 			chosenOption.parentNode.querySelector(`.credit-calculator__option-placeholder`).textContent = chosenOption.textContent;
-			
-			this.setState({creditType: CREDIT_TYPE[evt.currentTarget.value]},
-				this.setState({userCredit: CREDITS_TYPE_INFO.find(credit => credit.type === CREDIT_TYPE[evt.currentTarget.value])}),
-				this.setState({userCredit: extend(this.state.userCredit, {ownValue: valueFloorPenny(+this.state.userCredit.ownValue)})})
-			);
 
+			console.log(this.state.userCredit.initialFee)
+			
 			this.setState({
+				creditType: creditType,
+				userCredit: CREDITS_TYPE_INFO.find(credit => credit.type === creditType),
 				startOwnValue: this.state.creditType === `mortgage` ? START_OWN_VALUE : START_CAR_VALUE,
 				minOwnValue: this.state.creditType === `mortgage` ? MIN_OWN_VALUE : MIN_CAR_VALUE,
 				maxOwnValue: this.state.creditType === `mortgage` ? MAX_OWN_VALUE : MAX_CAR_VALUE,
 				minInitialFeeCoefficient: this.state.creditType === `mortgage` ? MIN_OWN_INITIAL_FEE_COEFFICIENT : MIN_CAR_INITIAL_FEE_COEFFICIENT,
 			});
 			
+			console.log(this.state.userCredit.initialFee)
 			this.onCloseSelect(evt);
 		}
+		// _onOptionChoseClick(evt) {
+		// 	const chosenOption = evt.currentTarget;
+		// 	const value = evt.currentTarget.value;
+		// 	const creditType = CREDIT_TYPE[value];
+
+		// 	chosenOption.parentNode.querySelector(`.credit-calculator__option-placeholder`).textContent = chosenOption.textContent;
+			
+		// 	this.setState({creditType: CREDIT_TYPE[value]},
+		// 		this.setState({userCredit: CREDITS_TYPE_INFO.find(credit => credit.type === CREDIT_TYPE[value])}),
+		// 		this.setState({userCredit: extend(this.state.userCredit, {ownValue: valueFloorPenny(+this.state.userCredit.ownValue)})})
+		// 		);
+
+		// 		console.log(this.state.minInitialFeeCoefficient)
+				
+		// 		this.setState({
+		// 			startOwnValue: this.state.creditType === `mortgage` ? START_OWN_VALUE : START_CAR_VALUE,
+		// 			minOwnValue: this.state.creditType === `mortgage` ? MIN_OWN_VALUE : MIN_CAR_VALUE,
+		// 			maxOwnValue: this.state.creditType === `mortgage` ? MAX_OWN_VALUE : MAX_CAR_VALUE,
+		// 			minInitialFeeCoefficient: this.state.creditType === `mortgage` ? MIN_OWN_INITIAL_FEE_COEFFICIENT : MIN_CAR_INITIAL_FEE_COEFFICIENT,
+		// 			userCredit: extend(this.state.userCredit, {loanTerms: this.state.creditType === `mortgage` ? MIN_OWN_LOAN_TERMS : MIN_CAR_LOAN_TERMS}),
+		// 		});
+		// 		console.log(this.state.minInitialFeeCoefficient)
+
+		// 	this.onCloseSelect(evt);
+		// }
 
 		// OWN VALUE
 		// OWN VALUE
@@ -148,8 +175,7 @@ export const withCreditCalculator = (Component) => {
 			console.log(evt.currentTarget.value, this.state.userCredit.ownValue)
 
 			const mask = evt.currentTarget.parentNode.querySelector(`.credit-calculator__input--own-value-mask`);
-
-			const step = this.state.creditType === `mortgage` ? OWN_VALUE_STEP : CAR_VALUE_STEP;
+			const step = this.state.creditType ===  `mortgage` ? OWN_VALUE_STEP : CAR_VALUE_STEP;
 			const stepDirection = evt.target.classList.contains(`credit-calculator__value-changer--down`) ? -1 : 1;
 
 			if (this.state.userCredit.ownValue + (step * stepDirection) < this.state.minOwnValue) {
@@ -275,6 +301,8 @@ export const withCreditCalculator = (Component) => {
 		}
 
 		onLoanTermsChange(evt) {
+			evt.preventDefault();
+			console.log(`change`)
 			this.setState({userCredit: extend(this.state.userCredit, {loanTerms: evt.currentTarget.value})});
 		}
 
@@ -314,22 +342,22 @@ export const withCreditCalculator = (Component) => {
 					initialFee={this.state.userCredit.initialFee}
 					minInitialFee={this.state.userCredit.ownValue * this.state.minInitialFeeCoefficient}
 					maxInitialFee={this.state.userCredit.ownValue - (MATERNAL_CAPITAL * this.state.userCredit.isMaternalCapitalUsed ? 1 : 0)}
-
 					loanTerms={this.state.userCredit.loanTerms}
 
+					
 					onOpenSelect={this.onOpenSelect}
 					onCloseSelect={this.onCloseSelect}
-
+					
 					onOwnValueMaskClick={this.onOwnValueMaskClick}
 					onOwnValueChange={this.onOwnValueChange}
 					onOwnValueBlur={this.onOwnValueBlur}
 					onButtonOwnValueChange={this.onButtonOwnValueChange}
-
+					
 					onChangeInitialFee={this.onChangeInitialFee}
 					onInitialFeeMaskClick={this.onInitialFeeMaskClick}
 					onInitialFeeRangeChange={this.onInitialFeeRangeChange}
 					onInitialFeeBlur={this.onInitialFeeBlur}
-
+					
 					onLoanTermsMaskClick={this.onLoanTermsMaskClick}
 					onLoanTermsChange={this.onLoanTermsChange}
 					onLoanTermsBlur={this.onLoanTermsBlur}

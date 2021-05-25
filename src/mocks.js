@@ -1,4 +1,4 @@
-import {START_OWN_VALUE, START_CAR_VALUE} from './const';
+import {START_OWN_VALUE, START_CAR_VALUE, MIN_OWN_LOAN_TERMS, MIN_CAR_LOAN_TERMS} from './const';
 
 export const SLIDES = [
 	{
@@ -76,11 +76,13 @@ export const CREDITS_TYPE_INFO = [
 		isMaternalCapitalUsed: false,
 		ownValue: START_OWN_VALUE,
 		initialFee: START_OWN_VALUE / 10,
+		loanTerms: MIN_OWN_LOAN_TERMS,
 	},
 	{
 		type: `car`,
 		isMaternalCapitalUsed: false,
 		ownValue: START_CAR_VALUE,
-		initialFee: START_CAR_VALUE / 10,
+		initialFee: START_CAR_VALUE / 5,
+		loanTerms: MIN_CAR_LOAN_TERMS,
 	}
 ];

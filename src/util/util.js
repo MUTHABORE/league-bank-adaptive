@@ -3,8 +3,8 @@ export const extend = (a, b) => {
 };
 
 export const valueMask = (value, unit=` рублей`) => {
-	console.log(value)
-	console.log(value.toLocaleString() + unit)
+	// console.log(value)
+	// console.log(value.toLocaleString() + unit)
 	if (isNaN(value) || value === `Некорректное значение`) return value;
 	return value.toLocaleString() + unit;
 };

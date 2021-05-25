@@ -1,11 +1,12 @@
 import React from 'react';
 
+import {CREDIT_TYPE, MIN_OWN_LOAN_TERMS, MIN_CAR_LOAN_TERMS, MAX_OWN_LOAN_TERMS, MAX_CAR_LOAN_TERMS} from '../const';
 import {valueMask} from '../util/util';
 import {withCreditCalculator} from '../hocs/with-credit-calculator';
 
 const CreditCalculator = (props) => {
 	const {creditType, onOpenSelect, onCloseSelect, onOwnValueChange, isSelectOpen, ownValue, initialFee, maxInitialFee, minInitialFee, onOwnValueBlur, onOwnValueMaskClick, onButtonOwnValueChange, onChangeInitialFee, onInitialFeeMaskClick, onInitialFeeBlur, onInitialFeeRangeChange, onLoanTermsChange, onLoanTermsBlur, onLoanTermsMaskClick, loanTerms} = props;
-	console.log(initialFee, maxInitialFee, minInitialFee)
+	// console.log(loanTerms)
 	return (
 		<section className="credit-calculator">
 			<h2 className="credit-calculator__title">Кредитный калькулятор</h2>
@@ -48,8 +49,14 @@ const CreditCalculator = (props) => {
 						</div>
 
 						<p className="credit-calculator__input-title">Срок кредитования</p>
-						<input className="credit-calculator__input credit-calculator__input--loan-terms-mask" type="text" value={loanTerms ? loanTerms + ` лет` : ``} onClick={onLoanTermsMaskClick} onChange={onLoanTermsChange} />
+						<input className="credit-calculator__input credit-calculator__input--loan-terms-mask" type="text" value={loanTerms + ` лет`} onClick={onLoanTermsMaskClick} onChange={onLoanTermsChange} />
 						<input className="credit-calculator__input credit-calculator__input--loan-terms" type="number" value={loanTerms} onChange={onLoanTermsChange} onBlur={onLoanTermsBlur} />
+
+						<div className="credit-calculator__input-range-wrapper">
+							<input className="credit-calculator__input-range" type="range" step="1" value={loanTerms} min={CREDIT_TYPE[creditType]} max={maxInitialFee || 0} onChange={onInitialFeeRangeChange} />
+							<small className="credit-calculator__input-range-min-title">{creditType === `mortgage` ? `10%` : `20%`}</small>
+						</div>
+
 					</fieldset>
 				</div>
 			)}
