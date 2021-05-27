@@ -1,12 +1,13 @@
 import React from 'react';
 
-import {CREDIT_TYPE, MIN_OWN_LOAN_TERMS, MIN_CAR_LOAN_TERMS, MAX_OWN_LOAN_TERMS, MAX_CAR_LOAN_TERMS} from '../const';
+import {CREDIT_TYPE, MIN_OWN_LOAN_TERMS, MIN_CAR_LOAN_TERMS, MAX_OWN_LOAN_TERMS, MAX_CAR_LOAN_TERMS, INITIAL_FEE_STEP_COEFFICIENT} from '../const';
 import {valueMask} from '../util/util';
 import {withCreditCalculator} from '../hocs/with-credit-calculator';
 
 const CreditCalculator = (props) => {
 	const {creditType, onOpenSelect, onCloseSelect, onOwnValueChange, isSelectOpen, ownValue, initialFee, maxInitialFee, minInitialFee, onOwnValueBlur, onOwnValueMaskClick, onButtonOwnValueChange, onChangeInitialFee, onInitialFeeMaskClick, onInitialFeeBlur, onInitialFeeRangeChange, onLoanTermsChange, onLoanTermsBlur, onLoanTermsMaskClick, loanTerms, onLoanTermsRangeChange} = props;
-	// console.log(loanTerms)
+	console.log(initialFee, minInitialFee, maxInitialFee)
+	// let minInitialFee = minInitialFee.isNaN() ? 0 : minInitialFee;
 	return (
 		<section className="credit-calculator">
 			<h2 className="credit-calculator__title">Кредитный калькулятор</h2>
@@ -44,7 +45,7 @@ const CreditCalculator = (props) => {
 						<input className="credit-calculator__input credit-calculator__input--initial-fee-mask" type="text" value={valueMask(initialFee)} onClick={onInitialFeeMaskClick} onChange={onChangeInitialFee} />
 						<input className="credit-calculator__input credit-calculator__input--initial-fee" type="number" value={initialFee} onChange={onChangeInitialFee} onBlur={onInitialFeeBlur} />
 						<div className="credit-calculator__input-range-wrapper">
-							<input className="credit-calculator__input-range" type="range" step={maxInitialFee * 0.05} value={initialFee} min={minInitialFee} max={maxInitialFee} onChange={onInitialFeeRangeChange} />
+							<input className="credit-calculator__input-range" type="range" step={maxInitialFee * INITIAL_FEE_STEP_COEFFICIENT} value={initialFee} min={minInitialFee} max={maxInitialFee} onChange={onInitialFeeRangeChange} />
 							<small className="credit-calculator__input-range-unit-title">{Math.round(initialFee / (maxInitialFee / 100)) + `%`}</small>
 						</div>
 

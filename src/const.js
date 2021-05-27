@@ -1,6 +1,7 @@
 export const CREDIT_TYPE = [`mortgage`, `car`];
+export const INITIAL_FEE_STEP_COEFFICIENT = 0.05;
 
-export const MATERNAL_CAPITAL = 470000;
+export const MATERNAL_CAPITAL = -470000;
 
 export const OWN_VALUE_STEP = 100000;
 export const CAR_VALUE_STEP = 50000;

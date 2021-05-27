@@ -134,7 +134,10 @@ export const withCreditCalculator = (Component) => {
 				this.setState({userCredit: extend(this.state.userCredit, {
 					ownValue: `Некорректное значение`,
 					initialFee: 0,
+					loanTerms: 0,
 				})});
+				console.log(`corr`, this.state.userCredit.ownValue, MATERNAL_CAPITAL, this.state.userCredit.isMaternalCapitalUsed ? 1 : 0)
+				console.log(`corr`, this.state.userCredit.ownValue + (MATERNAL_CAPITAL * this.state.userCredit.isMaternalCapitalUsed ? 1 : 0))
 				mask.style.backgroundColor = `#ffb3b3`;
 				return;
 			}
@@ -239,6 +242,7 @@ export const withCreditCalculator = (Component) => {
 			const mask = container.querySelector(`.credit-calculator__input--initial-fee-mask`);
 			const input = container.querySelector(`.credit-calculator__input--initial-fee`);
 			const value = evt.currentTarget.value;
+
 			const minInitialFee = this.state.userCredit.ownValue * this.state.minInitialFeeCoefficient;
 			const maxInitialFee = this.state.userCredit.ownValue;
 
@@ -329,8 +333,8 @@ export const withCreditCalculator = (Component) => {
 					ownValue={this.state.userCredit.ownValue}
 
 					initialFee={this.state.userCredit.initialFee}
-					minInitialFee={this.state.userCredit.ownValue * this.state.minInitialFeeCoefficient}
-					maxInitialFee={this.state.userCredit.ownValue - (MATERNAL_CAPITAL * this.state.userCredit.isMaternalCapitalUsed ? 1 : 0)}
+					minInitialFee={+this.state.userCredit.ownValue * this.state.minInitialFeeCoefficient}
+					maxInitialFee={this.state.userCredit.ownValue + (MATERNAL_CAPITAL * this.state.userCredit.isMaternalCapitalUsed ? 1 : 0)}
 					loanTerms={this.state.userCredit.loanTerms}
 
 					
