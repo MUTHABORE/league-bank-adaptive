@@ -270,8 +270,11 @@
 }
 
 .credit-calculator__input-checkbox-custom {
+	display: block;
 	position: relative;
-	padding-left: 20px;
+
+	padding-left: 24px;
+	margin: 15px 1px;
 	cursor: pointer;
 
 	font-size: 14px;
@@ -292,7 +295,7 @@
 		background-color: #2C36F2;
 	}
 
-	&::before {
+	&--active::before {
 		background-image: url("../../images/vector/checkbox-mark.svg");
 		background-repeat: no-repeat;
 		background-position: center;

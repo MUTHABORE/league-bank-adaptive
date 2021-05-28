@@ -2,11 +2,9 @@ export const extend = (a, b) => {
   return Object.assign({}, a, b);
 };
 
-export const valueMask = (value, unit=` рублей`) => {
-	// console.log(value)
-	// console.log(value.toLocaleString() + unit)
-	if (isNaN(value) || value === `Некорректное значение`) return value;
-	return value.toLocaleString() + unit;
+export const valueMask = (value) => {
+	if (value === `Некорректное значение`) return value;
+	return value.toLocaleString() + ` рублей`;
 };
 
 export const yearsMask = (years) => {

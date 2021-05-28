@@ -3,11 +3,11 @@ import React from 'react';
 import {CREDIT_TYPE, MIN_OWN_LOAN_TERMS, MIN_CAR_LOAN_TERMS, MAX_OWN_LOAN_TERMS, MAX_CAR_LOAN_TERMS, INITIAL_FEE_STEP_COEFFICIENT} from '../const';
 import {valueMask} from '../util/util';
 import {withCreditCalculator} from '../hocs/with-credit-calculator';
+import CreditOffer from './credit-offer';
 
 const CreditCalculator = (props) => {
-	const {creditType, onOpenSelect, onCloseSelect, onOwnValueChange, isSelectOpen, ownValue, initialFee, maxInitialFee, minInitialFee, onOwnValueBlur, onOwnValueMaskClick, onButtonOwnValueChange, onChangeInitialFee, onInitialFeeMaskClick, onInitialFeeBlur, onInitialFeeRangeChange, onLoanTermsChange, onLoanTermsBlur, onLoanTermsMaskClick, loanTerms, onLoanTermsRangeChange} = props;
-	console.log(initialFee, minInitialFee, maxInitialFee)
-	// let minInitialFee = minInitialFee.isNaN() ? 0 : minInitialFee;
+	const {creditType, isLifeInsuranceWanted, isKaskoWanted, isMaternalCapitalUsed, onOpenSelect, onCloseSelect, onOwnValueChange, isSelectOpen, ownValue, initialFee, maxInitialFee, minInitialFee, onOwnValueBlur, onOwnValueMaskClick, onButtonOwnValueChange, onChangeInitialFee, onInitialFeeMaskClick, onInitialFeeBlur, onInitialFeeRangeChange, onLoanTermsChange, onLoanTermsBlur, onLoanTermsMaskClick, loanTerms, onLoanTermsRangeChange, onCheckboxChange, userCredit} = props;
+	console.log(isLifeInsuranceWanted, isKaskoWanted)
 	return (
 		<section className="credit-calculator">
 			<h2 className="credit-calculator__title">Кредитный калькулятор</h2>
@@ -46,7 +46,7 @@ const CreditCalculator = (props) => {
 						<input className="credit-calculator__input credit-calculator__input--initial-fee" type="number" value={initialFee} onChange={onChangeInitialFee} onBlur={onInitialFeeBlur} />
 						<div className="credit-calculator__input-range-wrapper">
 							<input className="credit-calculator__input-range" type="range" step={maxInitialFee * INITIAL_FEE_STEP_COEFFICIENT} value={initialFee} min={minInitialFee} max={maxInitialFee} onChange={onInitialFeeRangeChange} />
-							<small className="credit-calculator__input-range-unit-title">{Math.round(initialFee / (maxInitialFee / 100)) + `%`}</small>
+							<small className="credit-calculator__input-range-unit-title">{maxInitialFee === 0 ? `0%` : Math.round(initialFee / (maxInitialFee / 100)) + `%`}</small>
 						</div>
 
 						<p className="credit-calculator__input-title">Срок кредитования</p>
@@ -59,14 +59,25 @@ const CreditCalculator = (props) => {
 							<small className="credit-calculator__input-range-unit-title credit-calculator__input-range-unit-title--max">{creditType === `mortgage` ? `30 лет` : `5 лет`}</small>
 						</div>
 
-						<input className="credit-calculator__input-checkbox" type="checkbox"/>
-						<div className="credit-calculator__input-checkbox-custom">Использовать материнский капитал</div>
+						{creditType === `mortgage` && (
+							<>
+								<input className="credit-calculator__input-checkbox" name="isMaternalCapitalUsed" id="maternalCapital" type="checkbox" onChange={onCheckboxChange}/>
+								<label className={`credit-calculator__input-checkbox-custom ${isMaternalCapitalUsed ? `credit-calculator__input-checkbox-custom--active` : ``}`} htmlFor="maternalCapital">Использовать материнский капитал</label>
+							</>
+						)}
 
-						{/* <input type="checkbox"/>
-						<span>Использовать материнский капитал</span>
+						{creditType === `car` && (
+							<>
+								<input className="credit-calculator__input-checkbox" id="kasko" type="checkbox" name="isKaskoWanted" onChange={onCheckboxChange}/>
+								<label className={`credit-calculator__input-checkbox-custom ${isKaskoWanted ? `credit-calculator__input-checkbox-custom--active` : ``}`} htmlFor="kasko">Оформить КАСКО в нашем банке</label>
 
-						<input type="checkbox"/>
-						<span>Использовать материнский капитал</span> */}
+								<input className="credit-calculator__input-checkbox" id="life-insurance" type="checkbox" name="isLifeInsuranceWanted" onChange={onCheckboxChange}/>
+								<label className={`credit-calculator__input-checkbox-custom ${isLifeInsuranceWanted ? `credit-calculator__input-checkbox-custom--active` : ``}`} htmlFor="life-insurance">Оформить Страхование жизни в нашем банке</label>
+							</>
+						)}
+						
+
+						<CreditOffer userCredit={userCredit} />
 
 					</fieldset>
 				</div>

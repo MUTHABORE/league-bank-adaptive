@@ -1,6 +1,6 @@
 import React, {PureComponent} from 'react';
 
-import {CREDIT_TYPE, OWN_VALUE_STEP, CAR_VALUE_STEP, START_OWN_VALUE, MIN_OWN_VALUE, MAX_OWN_VALUE, MIN_CAR_VALUE, MAX_CAR_VALUE, MATERNAL_CAPITAL, START_CAR_VALUE, MIN_OWN_INITIAL_FEE_COEFFICIENT, MIN_CAR_INITIAL_FEE_COEFFICIENT, MIN_OWN_LOAN_TERMS, MAX_OWN_LOAN_TERMS, MIN_CAR_LOAN_TERMS, MAX_CAR_LOAN_TERMS} from '../const';
+import {MONTH_AMOUNT, CREDIT_TYPE, OWN_VALUE_STEP, CAR_VALUE_STEP, START_OWN_VALUE, MIN_OWN_VALUE, MAX_OWN_VALUE, MIN_CAR_VALUE, MAX_CAR_VALUE, MATERNAL_CAPITAL, START_CAR_VALUE, MIN_OWN_INITIAL_FEE_COEFFICIENT, MIN_CAR_INITIAL_FEE_COEFFICIENT, MIN_OWN_LOAN_TERMS, MAX_OWN_LOAN_TERMS, MIN_CAR_LOAN_TERMS, MAX_CAR_LOAN_TERMS} from '../const';
 import {extend, valueFloorPenny} from '../util/util';
 import {CREDITS_TYPE_INFO} from '../mocks';
 
@@ -23,6 +23,8 @@ export const withCreditCalculator = (Component) => {
 				userCredit: {},
 			}
 
+			this.userCreditOffer = this.userCreditOffer.bind(this);
+
 			this._onOptionChoseClick = this._onOptionChoseClick.bind(this);
 			this.onOpenSelect = this.onOpenSelect.bind(this);
 			this.onCloseSelect = this.onCloseSelect.bind(this);
@@ -43,6 +45,7 @@ export const withCreditCalculator = (Component) => {
 			this.onLoanTermsChange = this.onLoanTermsChange.bind(this);
 			this.onLoanTermsBlur = this.onLoanTermsBlur.bind(this);
 			this.onLoanTermsRangeChange = this.onLoanTermsRangeChange.bind(this);
+			this.onCheckboxChange = this.onCheckboxChange.bind(this);
 		}
 
 		onOpenSelect(evt) {
@@ -71,6 +74,9 @@ export const withCreditCalculator = (Component) => {
 		}
 		
 		_onOptionChoseClick(evt) {
+			// const container = evt.currentTarget.parentNode;
+			// const mask = container.querySelector(`.credit-calculator__input--own-value-mask`);
+
 			const chosenOption = evt.currentTarget;
 			const value = chosenOption.value;
 			const creditType = CREDIT_TYPE[value];
@@ -89,7 +95,7 @@ export const withCreditCalculator = (Component) => {
 				maxOwnValue: creditType === `mortgage` ? MAX_OWN_VALUE : MAX_CAR_VALUE,
 				minInitialFeeCoefficient: creditType === `mortgage` ? MIN_OWN_INITIAL_FEE_COEFFICIENT : MIN_CAR_INITIAL_FEE_COEFFICIENT,
 			});
-			
+
 			console.log(this.state.creditType)
 			console.log(this.state.userCredit.initialFee)
 			this.onCloseSelect(evt);
@@ -134,10 +140,8 @@ export const withCreditCalculator = (Component) => {
 				this.setState({userCredit: extend(this.state.userCredit, {
 					ownValue: `Некорректное значение`,
 					initialFee: 0,
-					loanTerms: 0,
+					// loanTerms: minLoanTerms,
 				})});
-				console.log(`corr`, this.state.userCredit.ownValue, MATERNAL_CAPITAL, this.state.userCredit.isMaternalCapitalUsed ? 1 : 0)
-				console.log(`corr`, this.state.userCredit.ownValue + (MATERNAL_CAPITAL * this.state.userCredit.isMaternalCapitalUsed ? 1 : 0))
 				mask.style.backgroundColor = `#ffb3b3`;
 				return;
 			}
@@ -206,7 +210,7 @@ export const withCreditCalculator = (Component) => {
 				this.setState({userCredit: extend(this.state.userCredit, {initialFee: valueFloorPenny(this.state.userCredit.ownValue * this.state.minInitialFeeCoefficient)})});
 				return;
 			}
-			if (this.state.userCredit.initialFee > this.state.userCredit.ownValue - (MATERNAL_CAPITAL * this.state.userCredit.isMaternalCapitalUsed ? 1 : 0)) {
+			if (this.state.userCredit.initialFee > this.state.userCredit.ownValue) {
 				this.setState({userCredit: extend(this.state.userCredit, {initialFee: valueFloorPenny(this.state.userCredit.ownValue)})});
 				return;
 			}
@@ -325,16 +329,63 @@ export const withCreditCalculator = (Component) => {
 			this.setState({userCredit: extend(this.state.userCredit, {loanTerms: evt.currentTarget.value})});
 		}
 
+		onCheckboxChange(evt) {
+			const checkboxName = evt.target.name;
+			this.setState({userCredit: extend(this.state.userCredit, {[checkboxName]: evt.target.checked})});
+		}
+
+		userCreditOffer() {
+			const userCredit = this.state.userCredit;
+			const creditType = this.state.creditType;
+			// if (creditType === `mortgage`) {
+				const creditAmount = userCredit.ownValue - (userCredit.initialFee + (userCredit.isMaternalCapitalUsed ? MATERNAL_CAPITAL : 0));
+				const paymentPeriodsAmount = userCredit.loanTerms * MONTH_AMOUNT;
+
+				const percentRateMortgage = (userCredit.initialFee / (userCredit.ownValue / 100)) >= 15 ? `8.50` : `9.40`;
+				const percentRateCarCredit = () => {
+					if (userCredit.isLifeInsuranceWanted && userCredit.isKaskoWanted) {
+						return `3.5`;
+					} else if (userCredit.isLifeInsuranceWanted || userCredit.isKaskoWanted) {
+						return `8.5`;
+					}
+					if (creditAmount > 2000000) {
+						return `15`;
+					} else if (creditAmount < 2000000) {
+						return `16`;
+					}
+				};
+				const percentRate = creditType === `mortgage` ? percentRateMortgage : percentRateCarCredit();
+
+				const monthlyPayment = Math.ceil(creditAmount * (((percentRate * 0.01) / MONTH_AMOUNT) / (1 - (1 + (percentRate * 0.01) / MONTH_AMOUNT) ** -paymentPeriodsAmount)));
+				const necessaryIncome = Math.ceil((monthlyPayment / 45) * 100);
+				console.log(userCredit.ownValue / 100)
+
+				let offer = {
+					type: creditType,
+					creditAmount: creditAmount,
+					percentRate: percentRate,
+					monthlyPayment: monthlyPayment,
+					necessaryIncome: necessaryIncome,
+				};
+				return offer;
+			// }
+		}
+
 		render() {
 			return(
 				<Component
 					isSelectOpen={this.state.isSelectOpen}
+					isMaternalCapitalUsed={this.state.userCredit.isMaternalCapitalUsed}
+					isKaskoWanted={this.state.userCredit.isKaskoWanted}
+					isLifeInsuranceWanted={this.state.userCredit.isLifeInsuranceWanted}
 					creditType={this.state.creditType}
 					ownValue={this.state.userCredit.ownValue}
 
+					userCredit={this.userCreditOffer()}
+
 					initialFee={this.state.userCredit.initialFee}
-					minInitialFee={+this.state.userCredit.ownValue * this.state.minInitialFeeCoefficient}
-					maxInitialFee={this.state.userCredit.ownValue + (MATERNAL_CAPITAL * this.state.userCredit.isMaternalCapitalUsed ? 1 : 0)}
+					minInitialFee={isNaN(this.state.userCredit.ownValue) ? 0 : this.state.userCredit.ownValue * this.state.minInitialFeeCoefficient}
+					maxInitialFee={isNaN(this.state.userCredit.ownValue) ? 0 : this.state.userCredit.ownValue}
 					loanTerms={this.state.userCredit.loanTerms}
 
 					
@@ -355,6 +406,8 @@ export const withCreditCalculator = (Component) => {
 					onLoanTermsChange={this.onLoanTermsChange}
 					onLoanTermsBlur={this.onLoanTermsBlur}
 					onLoanTermsRangeChange={this.onLoanTermsRangeChange}
+
+					onCheckboxChange={this.onCheckboxChange}
 				/>
 			)
 		}

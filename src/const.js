@@ -1,7 +1,11 @@
 export const CREDIT_TYPE = [`mortgage`, `car`];
+export const MONTH_AMOUNT = 12;
+export const MIN_MORTGAGE_AMOUNT = 500000;
+export const MIN_CAR_CREDIT_AMOUNT = 200000;
+
 export const INITIAL_FEE_STEP_COEFFICIENT = 0.05;
 
-export const MATERNAL_CAPITAL = -470000;
+export const MATERNAL_CAPITAL = 470000;
 
 export const OWN_VALUE_STEP = 100000;
 export const CAR_VALUE_STEP = 50000;
