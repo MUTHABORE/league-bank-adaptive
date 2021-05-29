@@ -80,10 +80,9 @@
 
 	padding: 0 14px;
 	padding-right: 33px;
-	border-top: 1px solid #C1C2CA;
 
 	font-weight: 500;
-	line-height: 57px;
+	line-height: 58px;
 
 	cursor: pointer;
 
@@ -226,23 +225,39 @@
 	&--loan-terms {
 		margin-top: 17px;
 	}
-	
-	&::-webkit-slider-runnable-track, 
+
 	&::-moz-range-track {
 		position: relative;
 		height: 1px;
 		background-color: #C1C2CA;
 	}
+	
+	&::-webkit-slider-runnable-track {
+		position: relative;
+		height: 1px;
+		background-color: #C1C2CA;
+	}
 
-	&::-webkit-slider-thumb,
 	&::-moz-range-thumb {
+		-webkit-appearance: none;
 		background: #2C36F2;
 		border: none;
 		border-radius: 50%;
 		cursor: pointer;
 		width: 14px;
 		height: 14px;
+		margin-top: -6px;
+		margin-left: 1px;
+	}
+
+	&::-webkit-slider-thumb {
 		-webkit-appearance: none;
+		background: #2C36F2;
+		border: none;
+		border-radius: 50%;
+		cursor: pointer;
+		width: 14px;
+		height: 14px;
 		margin-top: -6px;
 		margin-left: 1px;
 	}
@@ -302,4 +317,161 @@
 	}
 }
 
+@media (min-width: $tablet-width) {
+	.credit-calculator {
+		margin-top: 69px;
+		padding: 0 45px;
+    min-width: 100%;
+    box-sizing: border-box;
+	}
 
+	.credit-calculator__select {
+		margin-top: 18px;
+    margin-bottom: 16px;
+	}
+
+	.credit-calculator__step {
+		// margin-top: 17px;
+		margin-top: 19px;
+	}
+
+	.credit-calculator__title {
+		margin-bottom: 29px;
+
+		font-size: 32px;
+		line-height: 140%;
+		color: #1F1E25;
+	}
+
+	.credit-calculator__legend {
+		margin: 14px 0;
+		margin-bottom: 0;
+
+		font-weight: 500;
+		font-size: 18px;
+		line-height: 140%;
+		color: #1F1E25;
+	}
+
+	.credit-calculator__option-placeholder {
+		padding: 0 23px;
+    padding-right: 40px;
+
+		&::after {
+			top: 23px;
+    	right: 22px;
+		}
+	}
+	
+	.credit-calculator__value-changer--up {
+		right: 24px;
+	}
+
+	.credit-calculator__input {
+		margin-top: -1px;
+		&--initial-fee-mask,
+		&--loan-terms-mask {
+			margin-top: 9px;
+		}
+	}
+
+	.credit-calculator__input-title {
+		margin-top: 15px;
+	}
+
+	.credit-calculator__input-range {
+		&::-moz-range-thumb {
+			margin-left: 0;
+		}
+	
+		&::-webkit-slider-thumb {
+			margin-left: 0;
+		}
+	}
+
+	.credit-calculator__input-range-unit-title {
+		left: 0;
+		&--max {
+			right: 1px;
+			left: auto;
+		}
+	}
+
+	.credit-calculator__input-checkbox-custom {
+		margin: 18px auto;
+		font-size: 16px;
+		line-height: 140%;
+		color: #1F1E25;
+
+		&::before {
+			top: 2px;
+		}
+	}
+}
+
+@media (min-width: $desktop-width) {
+	.credit-calculator {
+		display: flex;
+
+		margin: 0 auto;
+		margin-top: 36px;
+		padding: 0 20px;
+		min-width: unset;
+		max-width: 1210px;
+
+		align-items: flex-start;
+		justify-content: space-between;
+	}
+
+	.credit-calculator__title {
+		margin-bottom: 50px;
+
+		font-weight: bold;
+		font-size: 41px;
+		line-height: 140%;
+	}
+
+	.credit-calculator__steps-wrapper {
+		width: 600px;
+	}
+
+	.credit-calculator__legend {
+		font-weight: 500;
+		font-size: 22px;
+	}
+
+	.credit-calculator__select {
+		margin-top: 22px;
+    margin-bottom: 15px;
+	}
+
+	.credit-calculator__option-placeholder {
+		line-height: 58px;
+	}
+
+	.credit-calculator__input-range-wrapper {
+		margin-top: 0px;
+    margin-bottom: 20px;
+	}
+
+	.credit-calculator__input {
+		font-weight: 500;
+		font-size: 18px;
+	}
+
+	.credit-calculator__input-wrapper {
+		margin-top: 10px;
+	}
+
+	.credit-calculator__input-info {
+		margin-bottom: 20px;
+	}
+
+	.credit-calculator__input-title {
+		margin-top: 17px;
+	}
+
+	.credit-calculator__input-checkbox-custom {
+		margin: 23px auto;
+	}
+}

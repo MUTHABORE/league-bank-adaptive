@@ -1,8 +1,7 @@
 .credit-offer {
-	margin: 29px auto;
+	margin: 14px auto;
 	padding: 16px;
 	background: #F6F7FF;
-	background: red;
 	border-radius: 4px;
 }
 
@@ -33,6 +32,7 @@
 .credit-offer__parameter-title {
 	margin: 0;
 
+	font-weight: normal;
 	font-size: 16px;
 	line-height: 140%;
 	color: #394959;
@@ -40,7 +40,7 @@
 
 .credit-offer__button {
 	margin: 4px auto;
-	margin-bottom: 23px;
+	margin-bottom: 24px;
 	width: 100%;
 
 	padding: 0 15px;
@@ -52,4 +52,58 @@
 	background: #2C36F2;
 	border: none;
 	border-radius: 4px;
+}
+
+
+@media (min-width: $tablet-width) {
+
+	.credit-offer {
+		margin: 20px auto;
+		padding: 50px 60px;
+	}
+
+	.credit-offer__title {
+		margin-top: 6px;
+		margin-bottom: 27px;
+		font-weight: 500;
+		font-size: 22px;
+	}
+
+	.credit-offer__specification {
+		display: flex;
+		flex-wrap: wrap;
+		margin-bottom: 3px;
+		width: 555px;
+	}
+
+	.credit-offer__specification-item {
+		width: 227px;
+		margin-bottom: 27px;
+	}
+
+	.credit-offer__parameter {
+		font-weight: 500;
+		font-size: 22px;
+	}
+
+	.credit-offer__parameter-title {
+		margin-top: 2px;
+	}
+
+	.credit-offer__button {
+		margin-bottom: 9px;
+		font-weight: 500;
+		font-size: 16px;
+	}
+}
+
+@media (min-width: $desktop-width) {
+	.credit-offer {
+		width: 500px;
+    margin-top: 113px;
+		margin-left: 20px;
+		margin-right: 0;
+		padding: 49px 58px;
+    box-sizing: border-box;
+	}
 }

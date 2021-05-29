@@ -26,7 +26,7 @@ const CreditOffer = (props) => {
 						<h4 className="credit-offer__parameter-title">{`Сумма ${type === `mortgage` ? `ипотеки` : `автокредита`}`}</h4>
 					</li>
 					<li className="credit-offer__specification-item">
-						<p className="credit-offer__parameter">{percentRate + `%`}</p>
+						<p className="credit-offer__parameter">{percentRate.replace(".",",") + `%`}</p>
 						<h4 className="credit-offer__parameter-title">Процентная ставка</h4>
 					</li>
 					<li className="credit-offer__specification-item">
