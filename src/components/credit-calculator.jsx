@@ -1,13 +1,15 @@
 import React from 'react';
 
-import {CREDIT_TYPE, MIN_OWN_LOAN_TERMS, MIN_CAR_LOAN_TERMS, MAX_OWN_LOAN_TERMS, MAX_CAR_LOAN_TERMS, INITIAL_FEE_STEP_COEFFICIENT} from '../const';
+import {MIN_OWN_LOAN_TERMS, MIN_CAR_LOAN_TERMS, MAX_OWN_LOAN_TERMS, MAX_CAR_LOAN_TERMS, INITIAL_FEE_STEP_COEFFICIENT} from '../const';
 import {valueMask} from '../util/util';
 import {withCreditCalculator} from '../hocs/with-credit-calculator';
 import CreditOffer from './credit-offer';
+import CreditRequest from './credit-request';
+import FormPopup from './form-popup';
 
 const CreditCalculator = (props) => {
-	const {creditType, isLifeInsuranceWanted, isKaskoWanted, isMaternalCapitalUsed, onOpenSelect, onCloseSelect, onOwnValueChange, isSelectOpen, ownValue, initialFee, maxInitialFee, minInitialFee, onOwnValueBlur, onOwnValueMaskClick, onButtonOwnValueChange, onChangeInitialFee, onInitialFeeMaskClick, onInitialFeeBlur, onInitialFeeRangeChange, onLoanTermsChange, onLoanTermsBlur, onLoanTermsMaskClick, loanTerms, onLoanTermsRangeChange, onCheckboxChange, userCredit} = props;
-	console.log(isLifeInsuranceWanted, isKaskoWanted)
+	const {isFormOpen, creditType, isLifeInsuranceWanted, isKaskoWanted, isMaternalCapitalUsed, onOpenSelect, onCloseSelect, onOwnValueChange, isSelectOpen, ownValue, initialFee, maxInitialFee, minInitialFee, onOwnValueBlur, onOwnValueMaskClick, onButtonOwnValueChange, onChangeInitialFee, onInitialFeeMaskClick, onInitialFeeBlur, onInitialFeeRangeChange, onLoanTermsChange, onLoanTermsBlur, onLoanTermsMaskClick, loanTerms, onLoanTermsRangeChange, onCheckboxChange, userCredit, onFormSubmit, onFormOpen} = props;
+	console.log(isLifeInsuranceWanted, isKaskoWanted, )
 	return (
 		<section className="credit-calculator">
 			<div className="credit-calculator__steps-wrapper">
@@ -80,10 +82,14 @@ const CreditCalculator = (props) => {
 					</div>
 				)}
 			</div>
-			<CreditOffer userCredit={userCredit} />
-			<form>
+			{creditType !== null && (
+				<CreditOffer userCredit={userCredit} onFormOpen={onFormOpen}/>
+			)}
+			{isFormOpen && (
+				<CreditRequest onFormSubmit={onFormSubmit} />
+			)}
 
-			</form>
+			<FormPopup />
 		</section>
 	);
 };

@@ -4,7 +4,7 @@ import {MIN_MORTGAGE_AMOUNT, MIN_CAR_CREDIT_AMOUNT} from '../const';
 import {valueMask} from '../util/util';
 
 const CreditOffer = (props) => {
-	console.log(props.userCredit)
+	const {onFormOpen} = props;
 	const {type, creditAmount, percentRate, monthlyPayment, necessaryIncome} = props.userCredit;
 	const minCreditValue = type === `mortgage` ? MIN_MORTGAGE_AMOUNT : MIN_CAR_CREDIT_AMOUNT;
 	return (
@@ -38,7 +38,7 @@ const CreditOffer = (props) => {
 						<h4 className="credit-offer__parameter-title">Необходимый доход</h4>
 					</li>
 				</ul>
-				<button className="credit-offer__button">Оформить заявку</button>
+				<button className="credit-offer__button" onClick={onFormOpen}>Оформить заявку</button>
 			</>
 			)}
 

@@ -10,6 +10,7 @@ export const withCreditCalculator = (Component) => {
 			super(props);
 
 			this.state = {
+				isFormOpen: false,
 				isSelectOpen: false,
 				creditType: null,
 
@@ -17,13 +18,13 @@ export const withCreditCalculator = (Component) => {
 				minOwnValue: null,
 				maxOwnValue: null,
 				minInitialFeeCoefficient: null,
-				// minLoanTerms: null,
-				// maxLoanTerms: null,
 
 				userCredit: {},
 			}
 
 			this.userCreditOffer = this.userCreditOffer.bind(this);
+			this.onFormOpen = this.onFormOpen.bind(this);
+			this.onFormSubmit = this.onFormSubmit.bind(this);
 
 			this._onOptionChoseClick = this._onOptionChoseClick.bind(this);
 			this.onOpenSelect = this.onOpenSelect.bind(this);
@@ -57,7 +58,7 @@ export const withCreditCalculator = (Component) => {
 				element.addEventListener(`click`, this._onOptionChoseClick);
 			})
 
-			this.setState((extend(this.state, {isSelectOpen: true})));
+			this.setState({isSelectOpen: true});
 		}
 
 		onCloseSelect(evt) {
@@ -371,9 +372,20 @@ export const withCreditCalculator = (Component) => {
 			// }
 		}
 
+		onFormOpen(evt) {
+			this.setState({isFormOpen: true});
+			console.log(`open form`)
+		}
+
+		onFormSubmit(evt) {
+			this.setState({isFormOpen: false});
+			console.log(`close form`)
+		}
+
 		render() {
 			return(
 				<Component
+					isFormOpen={this.state.isFormOpen}
 					isSelectOpen={this.state.isSelectOpen}
 					isMaternalCapitalUsed={this.state.userCredit.isMaternalCapitalUsed}
 					isKaskoWanted={this.state.userCredit.isKaskoWanted}
@@ -408,6 +420,8 @@ export const withCreditCalculator = (Component) => {
 					onLoanTermsRangeChange={this.onLoanTermsRangeChange}
 
 					onCheckboxChange={this.onCheckboxChange}
+					onFormOpen={this.onFormOpen}
+					onFormSubmit={this.onFormSubmit}
 				/>
 			)
 		}

@@ -106,4 +106,14 @@
 		padding: 49px 58px;
     box-sizing: border-box;
 	}
+
+	.credit-offer__specification {
+		width: calc(100% + 20px);
+		max-width: unset;
+		justify-content: space-between;
+	}
+
+	.credit-offer__specification-item {
+		width: 177px;
+	}
 }
