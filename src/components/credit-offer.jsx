@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import {MIN_MORTGAGE_AMOUNT, MIN_CAR_CREDIT_AMOUNT} from '../const';
 import {valueMask} from '../util/util';
@@ -47,5 +48,16 @@ const CreditOffer = (props) => {
 		</section>
 	);
 };
+
+CreditOffer.propTypes = {
+	onFormOpen:  PropTypes.func.isRequired,
+	userCredit: PropTypes.shape({
+		creditAmount: PropTypes.number,
+		monthlyPayment: PropTypes.number,
+		necessaryIncome: PropTypes.number,
+		percentRate: PropTypes.string,
+		type: PropTypes.string,
+	}),
+}
 
 export default CreditOffer;

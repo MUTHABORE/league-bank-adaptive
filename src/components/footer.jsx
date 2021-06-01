@@ -4,8 +4,7 @@ const Footer = () => {
 	return (
 		<footer className="footer">
 			<div className="footer__container">
-				<a href="#top" className="footer__logo">
-				</a>
+				<a href="#top" className="footer__logo"><span class="visually-hidden">Логотип ЛИГА Банк</span></a>
 				<div className="footer__location">
 					<p className="footer__location-text">150015, г. Москва, ул. Московская, д. 32 Генеральная лицензия Банка России №1050 Ⓒ Лига Банк, 2019</p>
 				</div>
@@ -37,16 +36,16 @@ const Footer = () => {
 				</div>
 				<ul className="footer-social">
 					<li className="footer-social__item">
-						<a className="footer-social__link footer-social__link--facebook" href="#top"aria-label="Наша страница в Фейсбук"></a>
+						<a className="footer-social__link footer-social__link--facebook" href="#top"aria-label="Наша страница в Фейсбук"><span className="visually-hidden"></span></a>
 					</li>
 					<li className="footer-social__item">
-						<a className="footer-social__link footer-social__link--instagram" href="#top"aria-label="Наша страница в Инстаграм"></a>
+						<a className="footer-social__link footer-social__link--instagram" href="#top"><span className="visually-hidden">Наша страница в Инстаграм</span></a>
 					</li>
 					<li className="footer-social__item">
-						<a className="footer-social__link footer-social__link--twitter" href="#top"aria-label="Наша страница в Твиттер"></a>
+						<a className="footer-social__link footer-social__link--twitter" href="#top"><span className="visually-hidden">Наша страница в Твиттер</span></a>
 					</li>
 					<li className="footer-social__item">
-						<a className="footer-social__link footer-social__link--youtube" href="#top" aria-label="Наша страница в Ютьюб"></a>
+						<a className="footer-social__link footer-social__link--youtube" href="#top"><span className="visually-hidden">Наша страница в Ютьюб</span></a>
 					</li>
 				</ul>
 			</div>

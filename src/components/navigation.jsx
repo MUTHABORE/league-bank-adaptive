@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const Navigation = (props) => {
 	const {isNavigationOpen} = props;
@@ -21,5 +22,9 @@ const Navigation = (props) => {
 		</nav>
 	);
 };
+
+Navigation.propTypes = {
+	isNavigationOpen: PropTypes.bool.isRequired,
+}
 
 export default Navigation;

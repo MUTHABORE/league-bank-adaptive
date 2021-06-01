@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import InputMask from 'react-input-mask';
 
 import {withCreditRequest} from '../hocs/with-credit-request';
@@ -48,5 +49,14 @@ const CreditRequest = (props) => {
 		</form>
 	);
 };
+
+CreditRequest.propTypes = {
+	creditType: PropTypes.string.isRequired,
+	initialFee: PropTypes.number.isRequired,
+	loanTerms: PropTypes.number.isRequired,
+	onFormSubmit: PropTypes.func.isRequired,
+	onInputChange: PropTypes.func.isRequired,
+	ownValue: PropTypes.number.isRequired,
+}
 
 export default withCreditRequest(CreditRequest);

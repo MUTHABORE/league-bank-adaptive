@@ -37,5 +37,6 @@ export const withFormPopup = (Compopnent) => {
 	WithFormPopup.propTypes = {
 		onFormPopupClose: PropTypes.func.isRequired,
 	};
+
 	return WithFormPopup;
 }

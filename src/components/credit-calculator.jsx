@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import {MIN_OWN_LOAN_TERMS, MIN_CAR_LOAN_TERMS, MAX_OWN_LOAN_TERMS, MAX_CAR_LOAN_TERMS, INITIAL_FEE_STEP_COEFFICIENT} from '../const';
 import {valueMask} from '../util/util';
@@ -13,15 +14,15 @@ const CreditCalculator = (props) => {
 		<section className="credit-calculator">
 			<div className="credit-calculator__steps-wrapper">
 				<h2 id="creditCalculator" className="credit-calculator__title">Кредитный калькулятор</h2>
-				<div className="credit-calculator__step">
+				<div className="credit-calculator__step credit-calculator__step--first">
 
 					<fieldset className="credit-calculator__fieldset">
 						<legend className="credit-calculator__legend">Шаг 1. Цель кредита</legend>
 
 						<ul className="credit-calculator__select">
-							<li className={`credit-calculator__option-placeholder ${isSelectOpen ? `credit-calculator__option-placeholder--open` : ``}`} onClick={isSelectOpen === false ? onOpenSelect : onCloseSelect} tabIndex="1">Выберите цель кредита</li>
-							<li value="0" className="credit-calculator__option" tabIndex="1">Ипотечное кредитование</li>
-							<li value="1" className="credit-calculator__option" tabIndex="1">Автомобильное кредитование</li>
+							<li className={`credit-calculator__option-placeholder ${isSelectOpen ? `credit-calculator__option-placeholder--open` : ``}`} onClick={isSelectOpen === false ? onOpenSelect : onCloseSelect} tabIndex="0">Выберите цель кредита</li>
+							<li value="0" className="credit-calculator__option" tabIndex="0">Ипотечное кредитование</li>
+							<li value="1" className="credit-calculator__option" tabIndex="0">Автомобильное кредитование</li>
 						</ul>
 
 					</fieldset>
@@ -30,9 +31,9 @@ const CreditCalculator = (props) => {
 
 
 				{creditType !== null && (
-					<div className="credit-calculator__step">
+					<div className="credit-calculator__step credit-calculator__step--second">
 						<fieldset className="credit-calculator__fieldset">
-							<legend className="credit-calculator__legend">Шаг 2. Введите параметры кредита</legend>
+							<legend className="credit-calculator__legend credit-calculator__legend--second">Шаг 2. Введите параметры кредита</legend>
 
 							<p className="credit-calculator__input-title">{`Стоимость ${creditType === `mortgage` ? `недвижимости` : `автомобиля`}`}</p>
 							<div className="credit-calculator__input-wrapper">
@@ -95,5 +96,55 @@ const CreditCalculator = (props) => {
 		</section>
 	);
 };
+
+CreditCalculator.propTypes = {
+	creditType: PropTypes.string,
+	initialFee: PropTypes.number,
+	inputOwnValueRef: PropTypes.shape({}).isRequired,
+	isFormOpen: PropTypes.bool.isRequired,
+	isFormPopupOpen: PropTypes.bool.isRequired,
+	isKaskoWanted: PropTypes.bool,
+	isLifeInsuranceWanted: PropTypes.bool,
+	isMaternalCapitalUsed: PropTypes.bool,
+	isSelectOpen: PropTypes.bool.isRequired,
+	loanTerms: PropTypes.number,
+	maxInitialFee: PropTypes.oneOfType([
+		PropTypes.string,
+		PropTypes.number,
+	]),
+	minInitialFee: PropTypes.oneOfType([
+		PropTypes.string,
+		PropTypes.number,
+	]),
+	onButtonOwnValueChange: PropTypes.func.isRequired,
+	onChangeInitialFee: PropTypes.func.isRequired,
+	onCheckboxChange: PropTypes.func.isRequired,
+	onCloseSelect: PropTypes.func.isRequired,
+	onFormOpen: PropTypes.func.isRequired,
+	onFormPopupClose: PropTypes.func.isRequired,
+	onFormSubmit: PropTypes.func.isRequired,
+	onInitialFeeBlur: PropTypes.func.isRequired,
+	onInitialFeeMaskClick: PropTypes.func.isRequired,
+	onInitialFeeRangeChange: PropTypes.func.isRequired,
+	onLoanTermsBlur: PropTypes.func.isRequired,
+	onLoanTermsChange: PropTypes.func.isRequired,
+	onLoanTermsMaskClick: PropTypes.func.isRequired,
+	onLoanTermsRangeChange: PropTypes.func.isRequired,
+	onOpenSelect: PropTypes.func.isRequired,
+	onOwnValueBlur: PropTypes.func.isRequired,
+	onOwnValueChange: PropTypes.func.isRequired,
+	onOwnValueMaskClick: PropTypes.func.isRequired,
+	ownValue: PropTypes.oneOfType([
+		PropTypes.string,
+		PropTypes.number,
+	]),
+	userCredit: PropTypes.shape({
+		creditAmount: PropTypes.number,
+		monthlyPayment: PropTypes.number,
+		necessaryIncome: PropTypes.number,
+		percentRate: PropTypes.string,
+		type: PropTypes.string,
+	}).isRequired,
+}
 
 export default withCreditCalculator(CreditCalculator);

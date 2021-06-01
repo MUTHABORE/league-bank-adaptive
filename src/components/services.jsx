@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import {withServices} from '../hocs/with-services';
 import Identificator from './identificator';
@@ -58,5 +59,13 @@ const Services = (props) => {
 		</section>
 	);
 };
+
+Services.propTypes = {
+	activeSlide: PropTypes.number.isRequired,
+	onSwipeStartSlider: PropTypes.func.isRequired,
+	onTabChange: PropTypes.func.isRequired,
+	servicesListRef: PropTypes.shape({}).isRequired,
+	sliderWidth: PropTypes.number,
+}
 
 export default withServices(Services);

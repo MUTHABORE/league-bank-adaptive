@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import {withFormPopup} from '../hocs/with-form-popup';
 
@@ -13,6 +14,10 @@ const FormPopup = (props) => {
 			</div>
 		</div>
 	)
+};
+
+FormPopup.propTypes = {
+	onFormPopupClose: PropTypes.func.isRequired,
 };
 
 export default withFormPopup(FormPopup);

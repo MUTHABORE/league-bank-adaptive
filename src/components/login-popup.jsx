@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import {withLoginPopup} from '../hocs/with-login-popup';
 
@@ -11,7 +12,7 @@ const LoginPopup = (props) => {
 		}}>
 			<form className="login-popup__form" onClick={(evt) => evt.stopPropagation()}>
 				<div className="login-popup__header">
-					<a className="login-popup__logo" href="#top" aria-label="Логотип Лига Банка"></a>
+					<a className="login-popup__logo" href="#top"><span className="visually-hidden">Логотип Лига Банка</span></a>
 					<button className="login-popup__close-button" type="button" aria-label="Закрыть окно входа в личный кабинет" onClick={onPopupClose}></button>
 				</div>
 				<fieldset className="login-popup__wrapper">
@@ -33,5 +34,13 @@ const LoginPopup = (props) => {
 		</section>
 	);
 };
+
+LoginPopup.propTypes = {
+	isPasswordShow: PropTypes.bool.isRequired,
+	onInputChange: PropTypes.func.isRequired,
+	onPopupClose: PropTypes.func.isRequired,
+	onViewPasswordGrip: PropTypes.func.isRequired,
+	onViewPasswordGripEnd: PropTypes.func.isRequired,
+}
 
 export default withLoginPopup(LoginPopup);
