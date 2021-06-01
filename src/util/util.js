@@ -1,5 +1,5 @@
 export const extend = (a, b) => {
-  return Object.assign({}, a, b);
+	return Object.assign({}, a, b);
 };
 
 export const valueMask = (value) => {
@@ -14,3 +14,10 @@ export const yearsMask = (years) => {
 export const valueFloorPenny = (value) => {
 	return Math.floor(value * 100) / 100;
 };
+
+export const shakeEffect = (element) => {
+	element.style.animation = `shake ${600 / 1000}s`;
+	setTimeout(() => {
+		element.style.animation = ``;
+	}, 600);
+}

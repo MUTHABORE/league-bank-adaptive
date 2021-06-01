@@ -47,7 +47,7 @@
 
 	font-size: 16px;
 	line-height: 140%;
-  text-align: center;
+	text-align: center;
 }
 
 .form-popup__close-button {
@@ -84,7 +84,7 @@
 
 	.form-popup__close-button {
 		width: 17px;
-    height: 17px;
+		height: 17px;
 		top: 30px;
 		right: 30px;
 	}
@@ -93,12 +93,8 @@
 @media (min-width: $desktop-width) {
 	.form-popup {
 		width: 500px;
-    padding: 53px 67px;
+		padding: 53px 67px;
 		padding-bottom: 40px;
-	}
-
-	.form-popup__title {
-
 	}
 
 	.form-popup__close-button {

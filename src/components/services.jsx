@@ -5,7 +5,7 @@ import Identificator from './identificator';
 import {SERVICES} from '../mocks';
 
 const Services = (props) => {
-	const {onTabChange, onSwipeStartSlider, activeSlide} = props;
+	const {onTabChange, onSwipeStartSlider, activeSlide, servicesListRef} = props;
 	return (
 		<section className="services">
 			<div className="services__wrapper">
@@ -18,7 +18,7 @@ const Services = (props) => {
 					})}
 				</ul>
 
-				<ul className="services__list" style={{marginLeft: `-${(activeSlide - 1) * 100}%`}} onMouseDown={onSwipeStartSlider} onTouchStart={onSwipeStartSlider}>
+				<ul className="services__list" style={{marginLeft: `-${(activeSlide - 1) * 100}%`}} onMouseDown={onSwipeStartSlider} onTouchStart={onSwipeStartSlider} ref={servicesListRef}>
 					{SERVICES.map((element, i) => {
 						return (
 							<li key={i} className={`services__item services__item--${element.modificator}`}>

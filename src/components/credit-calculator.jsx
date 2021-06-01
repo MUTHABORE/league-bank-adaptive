@@ -8,12 +8,11 @@ import CreditRequest from './credit-request';
 import FormPopup from './form-popup';
 
 const CreditCalculator = (props) => {
-	const {isFormOpen, creditType, isLifeInsuranceWanted, isKaskoWanted, isMaternalCapitalUsed, onOpenSelect, onCloseSelect, onOwnValueChange, isSelectOpen, ownValue, initialFee, maxInitialFee, minInitialFee, onOwnValueBlur, onOwnValueMaskClick, onButtonOwnValueChange, onChangeInitialFee, onInitialFeeMaskClick, onInitialFeeBlur, onInitialFeeRangeChange, onLoanTermsChange, onLoanTermsBlur, onLoanTermsMaskClick, loanTerms, onLoanTermsRangeChange, onCheckboxChange, userCredit, onFormSubmit, onFormOpen} = props;
-	console.log(isLifeInsuranceWanted, isKaskoWanted, )
+	const {isFormOpen, isFormPopupOpen, creditType, isLifeInsuranceWanted, isKaskoWanted, isMaternalCapitalUsed, onOpenSelect, onCloseSelect, onOwnValueChange, isSelectOpen, ownValue, initialFee, maxInitialFee, minInitialFee, onOwnValueBlur, onOwnValueMaskClick, onButtonOwnValueChange, onChangeInitialFee, onInitialFeeMaskClick, onInitialFeeBlur, onInitialFeeRangeChange, onLoanTermsChange, onLoanTermsBlur, onLoanTermsMaskClick, loanTerms, onLoanTermsRangeChange, onCheckboxChange, userCredit, onFormSubmit, onFormOpen, onFormPopupClose, inputOwnValueRef} = props;
 	return (
 		<section className="credit-calculator">
 			<div className="credit-calculator__steps-wrapper">
-				<h2 className="credit-calculator__title">Кредитный калькулятор</h2>
+				<h2 id="creditCalculator" className="credit-calculator__title">Кредитный калькулятор</h2>
 				<div className="credit-calculator__step">
 
 					<fieldset className="credit-calculator__fieldset">
@@ -38,7 +37,7 @@ const CreditCalculator = (props) => {
 							<p className="credit-calculator__input-title">{`Стоимость ${creditType === `mortgage` ? `недвижимости` : `автомобиля`}`}</p>
 							<div className="credit-calculator__input-wrapper">
 								<button className="credit-calculator__value-changer credit-calculator__value-changer--down" onClick={onButtonOwnValueChange}></button>
-								<input className="credit-calculator__input credit-calculator__input--own-value-mask" type="text" value={valueMask(ownValue)} onMouseDown={onOwnValueMaskClick} onChange={onOwnValueChange} />
+								<input ref={inputOwnValueRef} className="credit-calculator__input credit-calculator__input--own-value-mask" type="text" value={valueMask(ownValue)} onMouseDown={onOwnValueMaskClick} onChange={onOwnValueChange} />
 								<input className="credit-calculator__input credit-calculator__input--own-value" type="number" value={ownValue} onBlur={onOwnValueBlur} onChange={onOwnValueChange} />
 								<button className="credit-calculator__value-changer credit-calculator__value-changer--up" onClick={onButtonOwnValueChange}></button>
 							</div>
@@ -82,14 +81,17 @@ const CreditCalculator = (props) => {
 					</div>
 				)}
 			</div>
-			{creditType !== null && (
+			{creditType !== null && ownValue !== `Некорректное значение` && (
 				<CreditOffer userCredit={userCredit} onFormOpen={onFormOpen}/>
 			)}
 			{isFormOpen && (
-				<CreditRequest onFormSubmit={onFormSubmit} />
+				<CreditRequest onFormSubmit={onFormSubmit} creditType={creditType} ownValue={ownValue} initialFee={initialFee} loanTerms={loanTerms} />
+			)}
+			{isFormPopupOpen && (
+				<FormPopup onFormPopupClose={onFormPopupClose}/>
 			)}
 
-			<FormPopup />
+			
 		</section>
 	);
 };

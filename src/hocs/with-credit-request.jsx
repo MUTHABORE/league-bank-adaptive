@@ -1,31 +1,40 @@
 import React, {PureComponent} from 'react';
 
+import PropTypes from 'prop-types';
+
 export const withCreditRequest = (Component) => {
 	class WithCreditRequest extends PureComponent {
 		constructor(props) {
 			super(props);
 
-			this.state = {
-
-			}
-
-			this.nameFieldRef = React.createRef();
+			this.onInputChange = this.onInputChange.bind(this);
 		}
 
-		componentDidMount() {
-			this.nameFieldRef.current.focus();
+		onInputChange(evt) {
+			localStorage.setItem(evt.target.name, evt.target.value);
+			this.setState({
+				[evt.target.name]: evt.target.value,
+			});
 		}
 
 		render() {
 			return(
 				<Component
-					nameFieldRef={this.nameFieldRef}
-					isFormOpen={this.isFormOpen}
-					onSubmitClick={this.onSubmitClick}
+					{...this.props}
+					onInputChange={this.onInputChange}
 					onFormSubmit={this.props.onFormSubmit}
 				/>
 			)
 		}
 	}
+
+	WithCreditRequest.propTypes = {
+		creditType: PropTypes.string.isRequired,
+		initialFee: PropTypes.number.isRequired,
+		loanTerms: PropTypes.number.isRequired,
+		onFormSubmit: PropTypes.func.isRequired,
+		ownValue: PropTypes.number.isRequired || PropTypes.string.isRequired,
+	};
+
 	return WithCreditRequest;
 };

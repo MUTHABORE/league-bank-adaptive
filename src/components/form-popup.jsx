@@ -1,10 +1,13 @@
 import React from 'react';
 
+import {withFormPopup} from '../hocs/with-form-popup';
+
 const FormPopup = (props) => {
+	const {onFormPopupClose} = props;
 	return (
-		<div className="form-popup__overlay">
-			<div className="form-popup">
-				<button className="form-popup__close-button" type="button"></button>
+		<div onClick={onFormPopupClose} className="form-popup__overlay">
+			<div className="form-popup" onClick={(evt) => {evt.stopPropagation()}}>
+				<button onClick={onFormPopupClose} className="form-popup__close-button" type="button"></button>
 				<b className="form-popup__title">Спасибо за обращение в наш банк.</b>
 				<p className="form-popup__text">Наш менеджер скоро свяжется с вами по указанному номеру телефона</p>
 			</div>
@@ -12,4 +15,4 @@ const FormPopup = (props) => {
 	)
 };
 
-export default FormPopup;
+export default withFormPopup(FormPopup);

@@ -1,4 +1,23 @@
 export const CREDIT_TYPE = [`mortgage`, `car`];
+export const CREDIT_TYPE_TRANSLATE = {
+	mortgage: `Ипотека`,
+	car: `Автокредит`,
+};
+
+export const SLIDE_TIME = 4000;
+export const DESKTOP_WIDTH_BORDER = 1024;
+export const NECESSARY_INCOME = 45;
+
+export const CAR_PERCENT_FULL = `16`;
+export const CAR_PERCENT_PRE_FULL = `16`;
+export const CAR_PERCENT_ONE_INSURANCE = `8.5`;
+export const CAR_PERCENT_TWO_INSURANCE = `3.5`;
+export const CAR_PERCENT_BORDER = 2000000;
+
+export const OWN_PERCENT_FULL = `9.40`;
+export const OWN_PERCENT_FEW = `8.50`;
+export const OWN_PERCENT_BORDER = 15;
+
 export const MONTH_AMOUNT = 12;
 export const MIN_MORTGAGE_AMOUNT = 500000;
 export const MIN_CAR_CREDIT_AMOUNT = 200000;

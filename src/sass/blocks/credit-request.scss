@@ -58,13 +58,17 @@
 	padding: 0 0 0 14px;
 
 	line-height: 58px;
-	color: #707C87;
 	letter-spacing: 0.03em;
-
+	
 	border: 1px solid #1F1E25;
 	border-radius: 4px;
 	box-sizing: border-box;
 	background-color: transparent;
+	
+	&::-moz-placeholder,
+	&::-webkit-input-placeholder {
+		color: #707C87;
+	}
 }
 
 .credit-request__submit {
@@ -136,7 +140,7 @@
 
 	.credit-request__submit {
 		padding-left: 15px;
-    padding-top: 2px;
+		padding-top: 2px;
 		font-size: 16px;
 	}
 }

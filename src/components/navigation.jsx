@@ -1,10 +1,10 @@
 import React from 'react';
 
-const Navigation = () => {
+const Navigation = (props) => {
+	const {isNavigationOpen} = props;
 	return (
-		<nav className="navigation">
+		<nav className={`navigation ${isNavigationOpen ? `navigation--open`: ``}`}>
 			<ul className="navigation__list navigation__list--header">
-			{/* <ul className="navigation__list navigation__list--header navigation__list--open"> */}
 				<li className="navigation__list-item navigation__list-item--header">
 					<a className="navigation__item-link  navigation__item-link--header" href="#top">Услуги</a>
 				</li>

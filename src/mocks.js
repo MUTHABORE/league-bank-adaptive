@@ -6,6 +6,7 @@ export const SLIDES = [
 		text: `Кредиты на любой случай`,
 		buttonText: `Рассчитать кредит`,
 		modificator: `credit`,
+		href: `#creditCalculator`,
 	},
 	{
 		title: `Лига Банк`,
@@ -18,9 +19,9 @@ export const SLIDES = [
 		text: `Всегда рядом`,
 		buttonText: `Найти отделение`,
 		modificator: `always-near`,
+		href: `#map`,
 	},
 ];
-
 
 export const SERVICES = [
 	{
@@ -74,15 +75,12 @@ export const CREDITS_TYPE_INFO = [
 	{
 		type: `mortgage`,
 		isMaternalCapitalUsed: false,
-		// isLifeInsuranceWanted: false,
-		// isKaskoWanted: false,
 		ownValue: START_OWN_VALUE,
 		initialFee: START_OWN_VALUE / 10,
 		loanTerms: MIN_OWN_LOAN_TERMS,
 	},
 	{
 		type: `car`,
-		// isMaternalCapitalUsed: false,
 		isLifeInsuranceWanted: false,
 		isKaskoWanted: false,
 		ownValue: START_CAR_VALUE,

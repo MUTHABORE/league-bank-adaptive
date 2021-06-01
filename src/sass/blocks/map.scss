@@ -1,0 +1,46 @@
+.map {
+	margin: 10px 0;
+}
+
+.map__title {
+	display: inline-block;
+	margin: 0;
+	margin-left: 5%;
+	margin-bottom: 27px;
+
+	font-weight: bold;
+	font-size: 22px;
+	line-height: 140%;
+	color: #1F1E25;
+}
+
+@media (min-width: $tablet-width) {
+	.map {
+		margin: 0 auto;
+		padding: 0 45px;
+	}
+
+	.map__title {
+		margin-left: 0;
+		margin-top: 15px;
+		margin-bottom: 34px;
+
+		font-size: 32px;
+	}
+
+	.map__iframe {
+		height: 462px;
+	}
+}
+
+@media (min-width: $desktop-width) {
+	.map {
+		padding: 0 98px;
+	}
+
+	.map__title {
+		margin-top: 72px;
+		margin-bottom: 56px;
+		font-size: 41px;
+	}
+}

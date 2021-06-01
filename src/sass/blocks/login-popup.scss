@@ -1,21 +1,24 @@
 .login-popup {
-	display: none;
+	display: flex;
 	position: fixed;
-
-	padding: 48px 15px;
 	left: 0;
-  top: 0;
+	top: 0;
 	height: 100vh;
 	width: 100vw;
 	
-	background-color: #FFF;
+	justify-content: center;
+	align-items: center;
+	background-color: rgba(0, 0, 0, 0.3);
 	box-sizing: border-box;
 	z-index: 99;
 }
 
 .login-popup__form {
+	width: 290px;
+	margin-right: 17px;
 	padding: 45px 15px;
 	padding-bottom: 41px;
+
 	background-color: #F6F7FF;
 	border: 4px solid #2C36F2;
 	box-sizing: border-box;
@@ -106,7 +109,7 @@
 	position: absolute;
 
 	bottom: 46px;
-  right: 14px;
+	right: 14px;
 	width: 22px;
 	height: 11px;
 	padding: 0;
@@ -131,7 +134,8 @@
 
 @media (min-width: $tablet-width) {
 	.login-popup__form {
-		margin: 30px;
+		width: 678px;
+		margin-right: 48px;
 		padding: 55px 82px;
 	}
 
@@ -164,14 +168,14 @@
 
 	.login-popup__field-button-secret {
 		bottom: 51px;
-    right: 23px;
+		right: 23px;
 	}
 
 	.login-popup__help {
 		margin: 0;
 		margin-left: auto;
 		margin-top: -21px;
-    line-height: 20px;
+		line-height: 20px;
 		font-size: 12px;
 		order: unset;
 	}
@@ -186,7 +190,6 @@
 
 @media (min-width: $desktop-width) {
 	.login-popup__form {
-		margin: 0 auto;
 		padding: 55px;
 		max-width: 544px;
 	}

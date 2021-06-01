@@ -1,6 +1,7 @@
-import React, {PureComponent} from "react";
+import React, {createRef, PureComponent} from "react";
 
 import {SERVICES} from "../mocks";
+import {DESKTOP_WIDTH_BORDER} from "../const";
 
 export const withServices = (Component) => {
 	class WithServices extends PureComponent {
@@ -11,6 +12,8 @@ export const withServices = (Component) => {
 				activeSlide: 1,
 			}
 
+			this.servicesListRef = createRef();
+
 			this.onTabChange = this.onTabChange.bind(this);
 			this.onSwipeStartSlider = this.onSwipeStartSlider.bind(this);
 			this._onSwipeMoveSlider = this._onSwipeMoveSlider.bind(this);
@@ -18,18 +21,16 @@ export const withServices = (Component) => {
 		}
 
 		onTabChange(evt) {
-			console.log(evt)
-			// this.sliderWidth = evt.view.innerWidth;
 			this.setState({activeSlide: evt.currentTarget.value});
 		}
 
 		onSwipeStartSlider(evt) {
 			this.sliderWidth = evt.currentTarget.clientWidth;
-			console.log(evt)
-
-			if (evt.view.innerWidth >= 1024) {
+			
+			if (evt.view.innerWidth >= DESKTOP_WIDTH_BORDER) {
 				return;
 			}
+			this.servicesListRef.current.style.transition = `unset`;
 
 			this.slider = evt.currentTarget;
 			const evtType = evt.type === `touchstart` ? evt.changedTouches[0] : evt;
@@ -37,7 +38,6 @@ export const withServices = (Component) => {
 			this.swipeLengthStart = evtType.clientX;
 			this.swipeStartX = evtType.clientX;
 			this.activeSlidePosition = (this.state.activeSlide - 1) * -this.sliderWidth;
-			console.log(this.sliderWidth)
 			
 			document.addEventListener(`touchmove`, this._onSwipeMoveSlider);
 			document.addEventListener(`mousemove`, this._onSwipeMoveSlider);
@@ -64,6 +64,11 @@ export const withServices = (Component) => {
 		}
 		
 		_onSwipeEndSlider(evt) {
+			if (evt.view.innerWidth >= DESKTOP_WIDTH_BORDER) {
+				return;
+			};
+
+			this.servicesListRef.current.style.transition = `margin-left 1s ease`;
 			document.removeEventListener(`touchmove`, this._onSwipeMoveSlider);
 			document.removeEventListener(`mousemove`, this._onSwipeMoveSlider);
 			document.removeEventListener(`touchend`, this._onSwipeEndSlider);
@@ -92,6 +97,7 @@ export const withServices = (Component) => {
 					onSwipeStartSlider={this.onSwipeStartSlider}
 					sliderWidth={this.sliderWidth}
 					activeSlide={this.state.activeSlide}
+					servicesListRef={this.servicesListRef}
 				/>
 			)
 		}

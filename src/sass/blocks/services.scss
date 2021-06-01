@@ -23,7 +23,7 @@
 
 	list-style: none;
 
-		// transition: margin-left 1s ease;
+	transition: margin-left 1s ease;
 }
 
 .services__item-wrapper {
@@ -48,7 +48,7 @@
 		width: 87px;
 		height: 113px;
 		right: 0px;
-    top: 98px;
+		top: 98px;
 
 		background-size: cover;
 		background-repeat: no-repeat;
@@ -117,7 +117,7 @@
 		margin-right: 20px;
 
 		&:first-child {
-    	margin-right: 45px;
+			margin-right: 45px;
 		}
 	}
 }
@@ -137,10 +137,10 @@
 		display: block;
 		position: absolute;
 	
-    width: 10px;
-    height: 9px;
-    left: -16px;
-    top: 5px;
+		width: 10px;
+		height: 9px;
+		left: -16px;
+		top: 5px;
 	
 		background-size: contain;
 		background-image: url("../../images/vector/check.svg");
@@ -184,6 +184,10 @@
 
 
 @media (min-width: $tablet-width) {
+	.services__list {
+		transition: unset;
+	}
+
 	.services__item-wrapper {
 		padding-right: 295px;
 	}
@@ -234,8 +238,8 @@
 
 	.services__options-list {
 		padding-left: 21px;
-    padding-top: 24px;
-    width: 340px;
+		padding-top: 24px;
+		width: 340px;
 
 		&--insurance {
 			margin-bottom: 15px;
@@ -261,14 +265,14 @@
 
 	.services__offer {
 		margin-top: 28px;
-    font-size: 16px;
-    margin-bottom: 0;
-    margin-right: 65px;
+		font-size: 16px;
+		margin-bottom: 0;
+		margin-right: 65px;
 	}
 
 	.services__option-button {
 		display: inline-block;
-    padding: 0 30px;
+		padding: 0 30px;
 		margin-top: 15px;
 
 		font-weight: 500;
@@ -309,7 +313,7 @@
 		line-height: 93px;
 		color: #4C4B51;
 		
-    box-sizing: border-box;
+		box-sizing: border-box;
 		cursor: pointer;
 		
 		&::before {
@@ -332,7 +336,7 @@
 		
 		&--credit::before {
 			right: calc(50% + 26px);
-    	top: 31px;
+			top: 31px;
 			background-image: url("../../images/vector/cards.svg");
 		}
 		
@@ -372,18 +376,15 @@
 
 
 	.services__list {
-		// width: 100vw;
 		justify-content: space-between;
-  	align-items: flex-start;
-		// overflow-x: unset;
+		align-items: flex-start;
 	}
 	
 	.services__item {
 		position: relative;
-    left: 0%;
+		left: 0%;
 		
 		padding: 60px 70px;
-		// padding-bottom: 41px;
 		min-width: 100vw;
 		min-width: 100%;
 
@@ -398,7 +399,7 @@
 		}
 	
 		&--credit::before {
-    	top: 55px;
+			top: 55px;
 			background-image: url("../../images/car-desktop.png");
 		}
 	

@@ -1,6 +1,7 @@
-import React, {PureComponent} from "react";
+import React, {createRef, PureComponent} from "react";
 
 import {SLIDES} from "../mocks";
+import {DESKTOP_WIDTH_BORDER, SLIDE_TIME} from "../const";
 
 export const withSlider = (Component) => {
 	class WithSlider extends PureComponent {
@@ -10,6 +11,8 @@ export const withSlider = (Component) => {
 			this.state = {
 				activeSlide: 1,
 			}
+
+			this.sliderListRef = createRef();
 
 			this.activeSlidePosition = 0;
 
@@ -24,7 +27,7 @@ export const withSlider = (Component) => {
 		_setIntervalChangeSlider() {
 			this.sliderInterval = setInterval(() => {
 				this.setState({activeSlide: this.state.activeSlide === SLIDES.length ? 1 : this.state.activeSlide + 1});
-			}, 4000000);
+			}, SLIDE_TIME);
 		}
 
 		_removeIntervalChangeSlider() {
@@ -37,10 +40,11 @@ export const withSlider = (Component) => {
 
 		onSwipeStartSlider(evt) {
 			this.sliderWidth = evt.view.innerWidth;
-
-			if (this.sliderWidth >= 1024) {
+			
+			if (this.sliderWidth >= DESKTOP_WIDTH_BORDER) {
 				return;
 			}
+			this.sliderListRef.current.style.transition = `unset`;
 
 			this._removeIntervalChangeSlider();
 
@@ -77,6 +81,7 @@ export const withSlider = (Component) => {
 		}
 		
 		_onSwipeEndSlider(evt) {
+			this.sliderListRef.current.style.transition = `margin-left 1s ease`;
 			document.removeEventListener(`touchmove`, this._onSwipeMoveSlider);
 			document.removeEventListener(`mousemove`, this._onSwipeMoveSlider);
 			document.removeEventListener(`touchend`, this._onSwipeEndSlider);
@@ -108,6 +113,7 @@ export const withSlider = (Component) => {
 					activeSlide={this.state.activeSlide}
 					sliderWidth={this.sliderWidth}
 					onSwipeStartSlider={this.onSwipeStartSlider}
+					sliderListRef={this.sliderListRef}
 				/>
 			);
 		}

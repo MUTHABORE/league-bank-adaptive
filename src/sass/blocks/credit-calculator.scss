@@ -1,5 +1,6 @@
 .credit-calculator {
 	margin: 54px auto;
+	margin-bottom: 38px;
 	padding: 0 15px;
 	max-width: 320px;
 }
@@ -275,7 +276,7 @@
 	color: #707C87;
 
 	&--max {
-    left: auto;
+		left: auto;
 		right: 0px;
 	}
 }
@@ -321,17 +322,16 @@
 	.credit-calculator {
 		margin-top: 69px;
 		padding: 0 45px;
-    min-width: 100%;
-    box-sizing: border-box;
+		min-width: 100%;
+		box-sizing: border-box;
 	}
 
 	.credit-calculator__select {
 		margin-top: 18px;
-    margin-bottom: 16px;
+		margin-bottom: 16px;
 	}
 
 	.credit-calculator__step {
-		// margin-top: 17px;
 		margin-top: 19px;
 	}
 
@@ -355,11 +355,11 @@
 
 	.credit-calculator__option-placeholder {
 		padding: 0 23px;
-    padding-right: 40px;
+		padding-right: 40px;
 
 		&::after {
 			top: 23px;
-    	right: 22px;
+			right: 22px;
 		}
 	}
 	
@@ -443,7 +443,7 @@
 
 	.credit-calculator__select {
 		margin-top: 22px;
-    margin-bottom: 15px;
+		margin-bottom: 15px;
 	}
 
 	.credit-calculator__option-placeholder {
@@ -452,7 +452,7 @@
 
 	.credit-calculator__input-range-wrapper {
 		margin-top: 0px;
-    margin-bottom: 20px;
+		margin-bottom: 20px;
 	}
 
 	.credit-calculator__input {

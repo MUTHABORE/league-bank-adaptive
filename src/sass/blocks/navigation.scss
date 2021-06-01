@@ -1,22 +1,20 @@
 .navigation {
-	display: flex;
+	display: none;
 	width: 100%;
-	// margin-top: 50px;
+
+	&--open {
+		display: flex;
+		min-width: 100%;
+		padding: 0;
+		margin-top: 49px;
+	}
 }
 
 .navigation__list {
+	padding: 0;
+	width: 100%;
 	margin: 0;
 	list-style: none;
-}
-
-.navigation__list--header {
-	display: none;
-}
-
-.navigation__list--open {
-	display: block;
-	width: 100%;
-	padding: 0;
 }
 
 .navigation__item-link {
@@ -37,6 +35,7 @@
 
 @media (min-width: $tablet-width) {
 	.navigation {
+		display: flex;
 		width: auto;
 		margin: 0;
 	}
