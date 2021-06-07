@@ -17,7 +17,7 @@
 	margin: 0 3px;
 	border-radius: 50%;
 	background-color: #2028B6;
-
+	
 	&--checked {
 		background-color: #F6F7FF;
 	}
@@ -25,6 +25,10 @@
 	&-services--checked {
 		background-color: #E0E0E0;
 	}
+}
+
+.identificator__radio-hidden {
+	display: none;
 }
 
 @media (min-width: $tablet-width) {

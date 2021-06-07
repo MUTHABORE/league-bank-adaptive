@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import moment from 'moment';
+import 'moment/locale/ru';
 
 import {MIN_OWN_LOAN_TERMS, MIN_CAR_LOAN_TERMS, MAX_OWN_LOAN_TERMS, MAX_CAR_LOAN_TERMS, INITIAL_FEE_STEP_COEFFICIENT} from '../const';
 import {valueMask} from '../util/util';
@@ -12,6 +14,8 @@ const CreditCalculator = (props) => {
 	const {isFormOpen, isFormPopupOpen, creditType, isLifeInsuranceWanted, isKaskoWanted, isMaternalCapitalUsed, onOpenSelect, onCloseSelect, onOwnValueChange, isSelectOpen, ownValue, initialFee, maxInitialFee, minInitialFee, onOwnValueBlur, onOwnValueMaskClick, onButtonOwnValueChange, onChangeInitialFee, onInitialFeeMaskClick, onInitialFeeBlur, onInitialFeeRangeChange, onLoanTermsChange, onLoanTermsBlur, onLoanTermsMaskClick, loanTerms, onLoanTermsRangeChange, onCheckboxChange, userCredit, onFormSubmit, onFormOpen, onFormPopupClose, inputOwnValueRef} = props;
 	return (
 		<section className="credit-calculator">
+			<div className="credit-calculator__upper-steps-wrapper">
+
 			<div className="credit-calculator__steps-wrapper">
 				<h2 id="creditCalculator" className="credit-calculator__title">Кредитный калькулятор</h2>
 				<div className="credit-calculator__step credit-calculator__step--first">
@@ -53,7 +57,7 @@ const CreditCalculator = (props) => {
 							</div>
 
 							<p className="credit-calculator__input-title">Срок кредитования</p>
-							<input className="credit-calculator__input credit-calculator__input--loan-terms-mask" type="text" value={loanTerms + ` лет`} onClick={onLoanTermsMaskClick} onChange={onLoanTermsChange} />
+							<input className="credit-calculator__input credit-calculator__input--loan-terms-mask" type="text" value={moment.duration(+loanTerms, "years").humanize()} onClick={onLoanTermsMaskClick} onChange={onLoanTermsChange} />
 							<input className="credit-calculator__input credit-calculator__input--loan-terms" type="number" value={loanTerms} onChange={onLoanTermsChange} onBlur={onLoanTermsBlur} />
 
 							<div className="credit-calculator__input-range-wrapper">
@@ -85,6 +89,7 @@ const CreditCalculator = (props) => {
 			{creditType !== null && ownValue !== `Некорректное значение` && (
 				<CreditOffer userCredit={userCredit} onFormOpen={onFormOpen}/>
 			)}
+			</div>
 			{isFormOpen && (
 				<CreditRequest onFormSubmit={onFormSubmit} creditType={creditType} ownValue={ownValue} initialFee={initialFee} loanTerms={loanTerms} />
 			)}
@@ -92,7 +97,6 @@ const CreditCalculator = (props) => {
 				<FormPopup onFormPopupClose={onFormPopupClose}/>
 			)}
 
-			
 		</section>
 	);
 };

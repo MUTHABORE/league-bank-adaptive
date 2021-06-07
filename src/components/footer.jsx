@@ -4,7 +4,7 @@ const Footer = () => {
 	return (
 		<footer className="footer">
 			<div className="footer__container">
-				<a href="#top" className="footer__logo"><span class="visually-hidden">Логотип ЛИГА Банк</span></a>
+				<a href="#top" className="footer__logo"><span className="visually-hidden">Логотип ЛИГА Банк</span></a>
 				<div className="footer__location">
 					<p className="footer__location-text">150015, г. Москва, ул. Московская, д. 32 Генеральная лицензия Банка России №1050 Ⓒ Лига Банк, 2019</p>
 				</div>

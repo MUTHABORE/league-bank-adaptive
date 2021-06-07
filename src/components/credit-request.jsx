@@ -53,7 +53,7 @@ const CreditRequest = (props) => {
 CreditRequest.propTypes = {
 	creditType: PropTypes.string.isRequired,
 	initialFee: PropTypes.number.isRequired,
-	loanTerms: PropTypes.number.isRequired,
+	loanTerms: PropTypes.number,
 	onFormSubmit: PropTypes.func.isRequired,
 	onInputChange: PropTypes.func.isRequired,
 	ownValue: PropTypes.number.isRequired,

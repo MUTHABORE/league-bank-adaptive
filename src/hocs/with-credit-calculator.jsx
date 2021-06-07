@@ -149,6 +149,7 @@ export const withCreditCalculator = (Component) => {
 			const mask = evt.currentTarget.parentNode.querySelector(`.credit-calculator__input--own-value-mask`);
 			const step = this.state.creditType ===  `mortgage` ? OWN_VALUE_STEP : CAR_VALUE_STEP;
 			const stepDirection = evt.target.classList.contains(`credit-calculator__value-changer--down`) ? -1 : 1;
+			const initialFeePercent = Math.round(this.state.userCredit.initialFee / (this.state.userCredit.ownValue / 100));
 
 			if (this.state.userCredit.ownValue + (step * stepDirection) < this.state.minOwnValue) {
 				this.setState({userCredit: extend(this.state.userCredit, {ownValue: this.state.minOwnValue})}, this.initialFeeCorrection);
@@ -167,7 +168,10 @@ export const withCreditCalculator = (Component) => {
 				return;
 			}
 
-			this.setState({userCredit: extend(this.state.userCredit, {ownValue: valueFloorPenny(+this.state.userCredit.ownValue + (step * stepDirection))})}, this.initialFeeCorrection);
+			this.setState({userCredit: extend(this.state.userCredit, {
+				ownValue: valueFloorPenny(+this.state.userCredit.ownValue + (step * stepDirection)),
+				initialFee: (`0.` + initialFeePercent) * (valueFloorPenny(+this.state.userCredit.ownValue + (step * stepDirection))),
+			})});
 		}
 		
 		

@@ -302,6 +302,10 @@
 
 	color: #1F1E25;
 
+	&:hover {
+		color: #2c36f2;
+	}
+
 	&::before {
 		position: absolute;
 		display: block;
@@ -312,10 +316,12 @@
 		left: 0;
 
 		border-radius: 2px;
-		background-color: #2C36F2;
+		border: 2px solid #2C36F2;
+		box-sizing: border-box;
 	}
-
+	
 	&--active::before {
+		background-color: #2C36F2;
 		background-image: url("../../images/vector/checkbox-mark.svg");
 		background-repeat: no-repeat;
 		background-position: center;
@@ -441,17 +447,11 @@
 
 @media (min-width: $desktop-width) {
 	.credit-calculator {
-		display: flex;
-
 		margin: 0 auto;
 		margin-bottom: 84px;
 		padding: 0 20px;
 		min-width: unset;
 		max-width: 1210px;
-
-		flex-wrap: wrap;
-		align-items: flex-start;
-		justify-content: space-between;
 	}
 
 	.credit-calculator__title {
@@ -462,8 +462,15 @@
 		line-height: 140%;
 	}
 
+	.credit-calculator__upper-steps-wrapper {
+		display: flex;
+		align-items: flex-start;
+		justify-content: space-between;
+	}
+
 	.credit-calculator__steps-wrapper {
-		width: 600px;
+		max-width: 600px;
+    flex-grow: 10;
 	}
 
 	.credit-calculator__step {

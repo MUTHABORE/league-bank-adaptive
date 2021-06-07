@@ -31,7 +31,7 @@ export const withCreditRequest = (Component) => {
 	WithCreditRequest.propTypes = {
 		creditType: PropTypes.string.isRequired,
 		initialFee: PropTypes.number.isRequired,
-		loanTerms: PropTypes.number.isRequired,
+		loanTerms: PropTypes.number,
 		onFormSubmit: PropTypes.func.isRequired,
 		ownValue: PropTypes.number.isRequired || PropTypes.string.isRequired,
 	};

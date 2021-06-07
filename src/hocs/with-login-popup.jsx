@@ -8,6 +8,8 @@ export const withLoginPopup = (Component) => {
 
 			this.state = {
 				isPasswordShow: false,
+				login: ``,
+				password: ``,
 			};
 
 			this.onInputChange = this.onInputChange.bind(this);
